@@ -1,4 +1,4 @@
-package DataStructures;
+package DataStructures.Stack;
 
 
 //TODO: сделать поиск - метод Find

@@ -1,6 +1,11 @@
 package Main;
 
-import DataStructures.*;
+import DataStructures.BinaryTree.BinaryTree;
+import DataStructures.LinkedList.ListItem;
+import DataStructures.LinkedList.OWLL;
+import DataStructures.LinkedList.TWLL;
+import DataStructures.Stack.DynamicStack;
+import DataStructures.Queue.MyQueue;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -9,17 +14,41 @@ import java.util.Stack;
 
 public class MyClass {
 
+    public static void TestBinaryTree() {
+        Random r = new Random();
+        ArrayList<Integer> values = new ArrayList<Integer>();
+        for (int i = 0; i < 10; i++)
+            values.add(r.nextInt() % 100);
+        BinaryTree tree = new BinaryTree(values);
+        tree.BinaryAdd(values);
+    }
+
+    public static void TestTWLL() {
+        TWLL list = new TWLL();
+        for (int i = 0; i < 5; i++)
+            list.AddFirst(i);
+        System.out.print(list.ToString());
+        for (int i = 0; i < 5; i++)
+            list.Delete(i);
+        System.out.print(list.ToString());
+    }
+
     public static void TestOWLL() {
         OWLL list = new OWLL();
-        list.Add(1);
-        list.Add(2);
-        list.Add(3);
+        list.AddLast(1);
+        System.out.print(list.ToString());
+        list.AddLast(2);
+        System.out.print(list.ToString());
+        list.AddLast(3);
         System.out.print(list.ToString());
         ListItem res = list.Search(1);
         list.Delete(3);
+        System.out.print(list.ToString());
         list.Delete(2);
+        System.out.print(list.ToString());
         list.Delete(0);
-        list.Add(99);
+        System.out.print(list.ToString());
+        list.AddLast(99);
         System.out.print(list.ToString());
     }
 
@@ -193,7 +222,10 @@ public class MyClass {
     public static void main(String args[]) {
         //TestDynamicStack();
         //TestQueue();
-        TestOWLL();
+        //TestOWLL();
+        //TestTWLL();
+        TestBinaryTree();
+
     }
 }
 
