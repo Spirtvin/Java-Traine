@@ -1,7 +1,6 @@
 package Games.XOGame.Forms;
 
 import Helpers.DataTransfer;
-import Helpers.Forms;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 
@@ -10,10 +9,11 @@ import java.awt.*;
 
 public class InputForm extends JFrame {
     private JButton btnDone;
-    private JTextArea txbData;
+    private JTextField txbData;
     public JPanel MainPanel;
     private JLabel lblTitle;
-    private JFrame frameToShow;
+    private JFrame formToShow;
+    public boolean dataReady;
 
     public InputForm() {
         btnDone.setText("Готово");
@@ -22,15 +22,15 @@ public class InputForm extends JFrame {
         Init();
     }
 
-    public InputForm(String btnTitle, String labelTitle, String dataTitle, JFrame frameToShow) {
+    public InputForm(String btnTitle, String labelTitle, String dataTitle) {
         btnDone.setText(btnTitle);
         lblTitle.setText(labelTitle);
         txbData.setText(dataTitle);
-        this.frameToShow = frameToShow;
         Init();
     }
 
     private void Init() {
+        this.dataReady = false;
         AddListeners();
         add(MainPanel);
         setLocationRelativeTo(null);
@@ -42,18 +42,12 @@ public class InputForm extends JFrame {
     private void AddListeners() {
         btnDone.addActionListener(e -> {
             DataTransfer.StrData.data = txbData.getText();
-            //if (this.frameToShow != null) {
-                Main mainForm = null;
-                try {
-                    mainForm = new Main();
-                } catch (Exception e1) {
-                    e1.printStackTrace();
-                }
-                mainForm.show();
-//                Forms formsHelper = new Forms();
-//                formsHelper.Show(formsHelper.Create(this.panel, ""));
-           //}
+            this.dataReady = true;
         });
+    }
+
+    public void Close() {
+        this.dispose();
     }
 
     {
@@ -72,15 +66,15 @@ public class InputForm extends JFrame {
      */
     private void $$$setupUI$$$() {
         MainPanel = new JPanel();
-        MainPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
-        btnDone = new JButton();
-        btnDone.setText("Button");
-        MainPanel.add(btnDone, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        txbData = new JTextArea();
-        MainPanel.add(txbData, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(150, 25), new Dimension(150, 25), null, 0, false));
+        MainPanel.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
         lblTitle = new JLabel();
         lblTitle.setText("Label");
-        MainPanel.add(lblTitle, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        MainPanel.add(lblTitle, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        txbData = new JFormattedTextField();
+        MainPanel.add(txbData, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        btnDone = new JButton();
+        btnDone.setText("Button");
+        MainPanel.add(btnDone, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**

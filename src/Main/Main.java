@@ -74,10 +74,7 @@ public class Main {
 //            );
 //            formsHelper.Show(input);
             //TODO:привязать форму main к игре
-            InputForm in = new InputForm("Готово", "Размер поля", "",null);
-            in.pack();
-            in.show();
-
+            Games.XOGame.Forms.Main mainForm = new Games.XOGame.Forms.Main();
 //            XO game = new XO(new IOConsole());
 //            game.Start();
         } catch (Exception ex) {

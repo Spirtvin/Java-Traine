@@ -1,6 +1,7 @@
 package Games.XOGame.Forms;
 
 import Games.Field.GameField;
+import Games.XOGame.Core.XO;
 import Helpers.DataTransfer;
 import Helpers.IOForm;
 import com.intellij.uiDesigner.core.GridConstraints;
@@ -17,24 +18,21 @@ public class Main extends JFrame {
     private JLabel lblOutPut;
 
     public Main() throws Exception {
-//        XO game = new XO(new IOForm());
-//        game.Start();
-        IOForm io = new IOForm();
 
-
-        GameField field = new GameField(Integer.parseInt(DataTransfer.StrData.data));
-        io.Out(field, tGameField);
-//        DefaultTableModel model = new DefaultTableModel();
-//        // Create a couple of columns
-//        model.addColumn("Col1");
-//        model.addColumn("Col2");
-//        // Append a row
-//        model.addRow(new Object[]{"-", "-"});
-//        model.addRow(new Object[]{"-", "-"});
-//        model.addRow(new Object[]{"-", "-"});
-//        tGameField.setModel(model);
-
-        Init();
+        try {
+            InputForm in = new InputForm("Готово", "Размер поля", "");
+            while (!in.dataReady)
+                Thread.sleep(1000);
+            in.Close();
+            IOForm io = new IOForm();
+            GameField field = new GameField(Integer.parseInt(DataTransfer.StrData.data));
+            io.Out(field, tGameField);
+            Init();
+            XO game = new XO(io);
+            game.Start();
+        } catch (Exception ex) {
+            new OutputForm("Ok", ex);
+        }
     }
 
     private void Init() {
