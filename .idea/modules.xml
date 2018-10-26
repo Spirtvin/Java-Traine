@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/JavaTraine.iml" filepath="$PROJECT_DIR$/JavaTraine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/jline-1.0/src/jline.iml" filepath="$PROJECT_DIR$/src/jline-1.0/src/jline.iml" />
     </modules>
   </component>
 </project>

@@ -7,9 +7,6 @@ import java.util.Arrays;
  * Бинарное дерево.
  */
 public class BinaryTree {
-    //TODO: Быстрая отрисовка.
-    //TODO: Сортировка слиянием.
-    //TODO: Вывод.
     /**
      * Корчень дерева.
      */

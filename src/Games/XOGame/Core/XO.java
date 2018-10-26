@@ -162,7 +162,7 @@ public class XO extends Game {
     public void Start() {
         try {
             Init(GetInt(Messages.Games.inputFieldSize), this.io);
-            while (!CheckWin() /*&& !Finish()*/) {
+            while (!CheckWin()) {
                 io.Out(toString(), "");
                 SetMark();
                 GetNextPlayer();

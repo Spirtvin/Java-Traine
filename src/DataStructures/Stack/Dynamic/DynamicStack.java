@@ -2,10 +2,7 @@ package DataStructures.Stack.Dynamic;
 
 import DataStructures.DataStructure;
 
-import java.util.ArrayList;
 
-
-//TODO:
 public class DynamicStack extends DataStructure {
 
     /**

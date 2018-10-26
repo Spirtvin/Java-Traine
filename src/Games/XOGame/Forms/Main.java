@@ -12,23 +12,21 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Main extends JFrame {
+public class Main extends IOForm {
     private JTable tGameField;
     public JPanel MainPanel;
     private JLabel lblOutPut;
 
-    public Main() throws Exception {
-
+    public Main() {
         try {
             InputForm in = new InputForm("Готово", "Размер поля", "");
-            while (!in.dataReady)
+            while (!in.GetDataReady())
                 Thread.sleep(1000);
             in.Close();
-            IOForm io = new IOForm();
             GameField field = new GameField(Integer.parseInt(DataTransfer.StrData.data));
-            io.Out(field, tGameField);
+            Out(field, tGameField);
             Init();
-            XO game = new XO(io);
+            XO game = new XO(this);
             game.Start();
         } catch (Exception ex) {
             new OutputForm("Ok", ex);
@@ -36,6 +34,7 @@ public class Main extends JFrame {
     }
 
     private void Init() {
+        Init(tGameField, lblOutPut);
         AddListeners();
         add(MainPanel);
         setLocationRelativeTo(null);
@@ -53,6 +52,7 @@ public class Main extends JFrame {
                 if (row >= 0 && col >= 0) {
                     System.out.println(row);
                     System.out.println(col);
+                    SetDataReady(true);
                 }
             }
         });

@@ -1,19 +1,18 @@
 package Games.XOGame.Forms;
 
 import Helpers.DataTransfer;
+import Helpers.IOForm;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class InputForm extends JFrame {
+public class InputForm extends IOForm {
     private JButton btnDone;
     private JTextField txbData;
     public JPanel MainPanel;
     private JLabel lblTitle;
-    private JFrame formToShow;
-    public boolean dataReady;
 
     public InputForm() {
         btnDone.setText("Готово");
@@ -30,7 +29,8 @@ public class InputForm extends JFrame {
     }
 
     private void Init() {
-        this.dataReady = false;
+        Init(txbData, lblTitle);
+        SetDataReady(false);
         AddListeners();
         add(MainPanel);
         setLocationRelativeTo(null);
@@ -41,8 +41,12 @@ public class InputForm extends JFrame {
 
     private void AddListeners() {
         btnDone.addActionListener(e -> {
-            DataTransfer.StrData.data = txbData.getText();
-            this.dataReady = true;
+            try {
+                DataTransfer.StrData.data = (String) In("");
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+            SetDataReady(true);
         });
     }
 

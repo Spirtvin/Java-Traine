@@ -1,6 +1,5 @@
 package DataStructures.LinkedList;
 
-//TODO: добавить добавление в начало и конец списка
 public class TWLL extends LL {
     /**
      * добавлеят элемент в список

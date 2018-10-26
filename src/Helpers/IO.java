@@ -11,13 +11,13 @@ public interface IO {
      * @param component элемент управления на форме
      * @return
      */
-    Object In(JComponent component);
+    Object In(JComponent component) throws InterruptedException;
     /**
      * считать данные из консоли
      * @param message инструкция по вводу
      * @return
      */
-    Object In(String message);
+    Object In(String message) throws InterruptedException;
     /**
      * вывести данные в элемент на форме
      * @param object объект для вывода
