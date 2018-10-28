@@ -3,32 +3,54 @@ package Threads.Trains;
 import jline.ConsoleReader;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.util.concurrent.Semaphore;
 
 public class Train extends Thread {
     Integer pos;
-    String name;
+    public String name;
     Integer length;
     Semaphore semaphore;
     JProgressBar railRoad;
+    JLabel lblName;
+    DefaultListModel<String> modelLeft;
+    DefaultListModel<String> modelRight;
+    Direction direction;
 
-    public Train(String name, Integer length, JProgressBar railRoad, Semaphore semaphore) {
+    public Train(String name, Integer length, JProgressBar railRoad, JLabel lblName, DefaultListModel<String> modelLeft, DefaultListModel<String> modelRight, Semaphore semaphore, Direction direction) {
         this.pos = 0;
         this.name = name;
         this.length = length;
         this.semaphore = semaphore;
         this.railRoad = railRoad;
+        this.lblName = lblName;
+        this.modelLeft = modelLeft;
+        this.modelRight = modelRight;
+        this.direction = direction;
     }
 
     public void Move() throws InterruptedException {
-        railRoad.setMaximum(this.length*2);
-        for (int i = 0; i < this.length*2; i++) {
+        if (direction == Direction.Left)
+            railRoad.setForeground(Color.BLUE);
+        else
+            railRoad.setForeground(Color.RED);
+        this.lblName.setText(this.name);
+        railRoad.setMaximum(this.length * 2);
+        for (int i = 0; i < this.length * 2; i++) {
             this.pos = i;
             railRoad.setValue(this.pos);
-            Thread.sleep(100);
+            Thread.sleep(10);
         }
         railRoad.setValue(0);
+        this.lblName.setText("");
+        if (direction == Direction.Left) {
+            modelLeft.addElement(this.name);
+            modelRight.removeElement(this.name);
+        } else {
+            modelRight.addElement(this.name);
+            modelLeft.removeElement(this.name);
+        }
     }
 
     public void clearConsole() throws IOException, InterruptedException {
@@ -65,7 +87,16 @@ public class Train extends Thread {
                 e.printStackTrace();
             }
         } else {
-
+            try {
+                semaphore.acquire();
+                try {
+                    Move();
+                } finally {
+                    semaphore.release();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
