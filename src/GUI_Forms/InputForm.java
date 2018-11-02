@@ -1,6 +1,5 @@
 package GUI_Forms;
 
-import Helpers.DataTransfer;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 
@@ -13,26 +12,38 @@ public class InputForm extends IOForm {
     public JPanel mainPanel;
     private JLabel lblTitle;
 
+    /**
+     * данные, которые ввел пользователь
+     */
+    public Object data;
+
     public InputForm() {
         btnDone.setText("Готово");
-        lblTitle.setText("Инструкия по вводу данных");
+        //lblTitle.setText("Инструкия по вводу данных");
+        lblTitle.setText(String.format("%d", Thread.currentThread().getId()));
         txbData.setText("Данные");
-        Init(mainPanel);
+        Open(mainPanel);
     }
 
+    /**
+     * @param btnTitle   текст кнопки
+     * @param labelTitle инкструкция по вводу
+     * @param dataTitle  текст в тектовом поле
+     */
     public InputForm(String btnTitle, String labelTitle, String dataTitle) {
         btnDone.setText(btnTitle);
         lblTitle.setText(labelTitle);
         txbData.setText(dataTitle);
-        Init(mainPanel);
+        Open(mainPanel);
     }
 
     public void AddListeners() {
         btnDone.addActionListener(e -> {
             try {
-                DataTransfer.StrData.data = (String) In("");
-            } catch (InterruptedException e1) {
-                e1.printStackTrace();
+                //DataTransfer.StrData.data = (String) In("");
+                data = In(txbData);
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
             SetDataReady(true);
         });

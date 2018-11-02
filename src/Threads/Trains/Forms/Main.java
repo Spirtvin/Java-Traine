@@ -23,7 +23,7 @@ public class Main extends SimpleForm {
         DefaultListModel<String> modelRight = new DefaultListModel<>();
         lstLeft.setModel(modelLeft);
         lstRight.setModel(modelRight);
-        Init(mainPanel);
+        Open(mainPanel);
         for (int i = 0; i < 5; i++) {
             Train train = new Train(String.valueOf(i + 1) + "L", 100, pbBridge, lblProgress, modelLeft, modelRight, semaphore, Direction.Right);
             modelLeft.addElement(train.name);
@@ -38,6 +38,11 @@ public class Main extends SimpleForm {
 
     @Override
     public void AddListeners() {
+
+    }
+
+    @Override
+    public void Close() {
 
     }
 

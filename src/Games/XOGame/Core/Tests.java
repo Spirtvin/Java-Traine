@@ -1,10 +1,10 @@
 package Games.XOGame.Core;
 
 import Constants.Messages;
+import GUI_Forms.IOConsole;
 import Games.Enums.CellValues;
 import Games.Game;
 import Games.Test;
-import GUI_Forms.IOConsole;
 
 public class Tests extends Test {
     XO xoGame;

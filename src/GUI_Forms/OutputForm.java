@@ -12,7 +12,7 @@ public class OutputForm<T> extends IOForm {
     private JPanel mainPanel;
 
     public OutputForm() {
-        Init(mainPanel);
+        Open(mainPanel);
     }
 
     /**
@@ -25,8 +25,9 @@ public class OutputForm<T> extends IOForm {
         btnOK.setText(btnTitle);
         lblData.setText(data.toString());
         btnOK.setText(btnTitle);
-        Init(mainPanel);
+        Open(mainPanel);
     }
+
     /**
      * привязывает обработчики кнопок
      */
@@ -54,7 +55,7 @@ public class OutputForm<T> extends IOForm {
         mainPanel.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
         lblData = new JLabel();
         lblData.setText("Label");
-        mainPanel.add(lblData, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mainPanel.add(lblData, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         btnOK = new JButton();
         btnOK.setText("Button");
         mainPanel.add(btnOK, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -63,7 +64,7 @@ public class OutputForm<T> extends IOForm {
     /**
      * @noinspection ALL
      */
-    public JPanel $$$getRootComponent$$$() {
+    public JComponent $$$getRootComponent$$$() {
         return mainPanel;
     }
 }

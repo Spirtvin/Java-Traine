@@ -32,6 +32,7 @@ public class IOForm extends SimpleForm implements IO {
      */
     @Override
     public Object In(JComponent component) throws InterruptedException {
+        System.out.println(Thread.currentThread().getId());
         while (!GetDataReady())
             Thread.sleep(1000);
         if (component.getClass().getName() == (new JTable()).getClass().getName()) {
@@ -114,6 +115,11 @@ public class IOForm extends SimpleForm implements IO {
      */
     @Override
     public void AddListeners() {
+
+    }
+
+    @Override
+    public void Close() {
 
     }
 }

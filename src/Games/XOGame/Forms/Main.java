@@ -1,11 +1,11 @@
 package Games.XOGame.Forms;
 
+import GUI_Forms.IOForm;
 import GUI_Forms.InputForm;
 import GUI_Forms.OutputForm;
 import Games.Field.GameField;
 import Games.XOGame.Core.XO;
 import Helpers.DataTransfer;
-import GUI_Forms.IOForm;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 
@@ -45,7 +45,7 @@ public class Main extends IOForm {
         setVisible(true);
     }
 
-    private void AddListeners() {
+    public void AddListeners() {
         tGameField.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
