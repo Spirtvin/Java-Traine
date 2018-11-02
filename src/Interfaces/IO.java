@@ -1,4 +1,4 @@
-package Helpers;
+package Interfaces;
 
 import javax.swing.*;
 

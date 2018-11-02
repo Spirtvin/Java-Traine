@@ -4,7 +4,7 @@ import Constants.Messages;
 import Games.Enums.CellValues;
 import Games.Game;
 import Games.Test;
-import Helpers.IOConsole;
+import GUI_Forms.IOConsole;
 
 public class Tests extends Test {
     XO xoGame;

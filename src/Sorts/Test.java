@@ -1,7 +1,7 @@
 package Sorts;
 
 import Generator.Generator;
-import Helpers.IOConsole;
+import GUI_Forms.IOConsole;
 import java.util.ArrayList;
 import java.util.Collections;
 

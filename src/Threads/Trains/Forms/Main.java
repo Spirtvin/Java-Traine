@@ -23,10 +23,8 @@ public class Main extends SimpleForm {
         DefaultListModel<String> modelRight = new DefaultListModel<>();
         lstLeft.setModel(modelLeft);
         lstRight.setModel(modelRight);
-        //lstLeft = new JList(modelLeft);
-        //lstRight = new JList(modelRight);
         Init(mainPanel);
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 5; i++) {
             Train train = new Train(String.valueOf(i + 1) + "L", 100, pbBridge, lblProgress, modelLeft, modelRight, semaphore, Direction.Right);
             modelLeft.addElement(train.name);
             train.start();

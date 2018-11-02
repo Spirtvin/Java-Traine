@@ -1,7 +1,6 @@
-package Games.XOGame.Forms;
+package GUI_Forms;
 
 import Helpers.DataTransfer;
-import Helpers.IOForm;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 
@@ -11,35 +10,24 @@ import java.awt.*;
 public class InputForm extends IOForm {
     private JButton btnDone;
     private JTextField txbData;
-    public JPanel MainPanel;
+    public JPanel mainPanel;
     private JLabel lblTitle;
 
     public InputForm() {
         btnDone.setText("Готово");
         lblTitle.setText("Инструкия по вводу данных");
         txbData.setText("Данные");
-        Init();
+        Init(mainPanel);
     }
 
     public InputForm(String btnTitle, String labelTitle, String dataTitle) {
         btnDone.setText(btnTitle);
         lblTitle.setText(labelTitle);
         txbData.setText(dataTitle);
-        Init();
+        Init(mainPanel);
     }
 
-    private void Init() {
-        Init(txbData, lblTitle);
-        SetDataReady(false);
-        AddListeners();
-        add(MainPanel);
-        setLocationRelativeTo(null);
-        pack();
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setVisible(true);
-    }
-
-    private void AddListeners() {
+    public void AddListeners() {
         btnDone.addActionListener(e -> {
             try {
                 DataTransfer.StrData.data = (String) In("");
@@ -69,22 +57,22 @@ public class InputForm extends IOForm {
      * @noinspection ALL
      */
     private void $$$setupUI$$$() {
-        MainPanel = new JPanel();
-        MainPanel.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
         lblTitle = new JLabel();
         lblTitle.setText("Label");
-        MainPanel.add(lblTitle, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mainPanel.add(lblTitle, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         txbData = new JFormattedTextField();
-        MainPanel.add(txbData, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        mainPanel.add(txbData, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         btnDone = new JButton();
         btnDone.setText("Button");
-        MainPanel.add(btnDone, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mainPanel.add(btnDone, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() {
-        return MainPanel;
+        return mainPanel;
     }
 }

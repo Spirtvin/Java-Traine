@@ -82,7 +82,6 @@ public class Train extends Thread {
         if (semaphore == null) {
             try {
                 Move();
-                //Print();
             } catch (Exception e) {
                 e.printStackTrace();
             }

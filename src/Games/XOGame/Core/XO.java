@@ -4,10 +4,7 @@ import Constants.Messages;
 import Games.Enums.CellValues;
 import Games.Field.GameField;
 import Games.Game;
-import Helpers.IO;
-
-import javax.swing.*;
-import java.awt.*;
+import Interfaces.IO;
 
 public class XO extends Game {
 

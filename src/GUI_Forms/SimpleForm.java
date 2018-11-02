@@ -7,6 +7,10 @@ import java.awt.*;
 
 public abstract class SimpleForm extends JFrame {
 
+    /**
+     * Инициализирует форму
+     * @param mainPanel главная панель
+     */
     public void Init(JPanel mainPanel) {
         AddListeners();
         add(mainPanel);
@@ -16,6 +20,9 @@ public abstract class SimpleForm extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * привязывает обработчики кнопок
+     */
     public abstract void AddListeners();
 
     {

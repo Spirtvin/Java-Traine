@@ -1,11 +1,12 @@
-package Helpers;
+package GUI_Forms;
 
 import Games.Field.GameField;
+import Interfaces.IO;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class IOForm extends JFrame implements IO {
+public class IOForm extends SimpleForm implements IO {
     private boolean dataReady;
     public JComponent inputControl;
     public JComponent outputControl;
@@ -106,5 +107,13 @@ public class IOForm extends JFrame implements IO {
         if (message != null && message.length() > 0)
             Out(message, outputControl);
         Out(object, outputControl);
+    }
+
+    /**
+     * привязывает обработчики кнопок
+     */
+    @Override
+    public void AddListeners() {
+
     }
 }

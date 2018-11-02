@@ -1,9 +1,11 @@
 package Games.XOGame.Forms;
 
+import GUI_Forms.InputForm;
+import GUI_Forms.OutputForm;
 import Games.Field.GameField;
 import Games.XOGame.Core.XO;
 import Helpers.DataTransfer;
-import Helpers.IOForm;
+import GUI_Forms.IOForm;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 

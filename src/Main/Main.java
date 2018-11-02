@@ -4,7 +4,7 @@ import DataStructures.Stack.Dynamic.DynamicStack;
 import DataStructures.Stack.Static.StaticStack;
 import DataStructures.Stack.Static.Tests;
 import Games.XOGame.Core.XO;
-import Helpers.IOConsole;
+import GUI_Forms.IOConsole;
 import Sorts.Buble.BubbleSort;
 import Sorts.Merge.MergeSort;
 import Sorts.Quick.QuickSort;
@@ -105,16 +105,12 @@ public class Main {
 
     //TODO:привязать форму main к игре
     public static void main(String args[]) {
-        /*GameXOTest();
-        try {
-            new Games.XOGame.GUI_Forms.Main();
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }*/
-        //SemaphoreTest();
-        //Train train = new Train("T1", 15, null);
-        //train.start();
-        new Threads.Trains.Forms.Main();
+//        GameXOTest();
+//        try {
+//            new Games.XOGame.Forms.Main();
+//        } catch (Exception ex) {
+//            System.out.println(ex);
+//        }
     }
 }
 
