@@ -1,6 +1,7 @@
-package GUI_Forms;
+package Console;
 
 import Interfaces.IO;
+import Interfaces.IOType;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.*;
@@ -11,7 +12,23 @@ import java.util.Scanner;
 /**
  * упрощает ввод/вывод информации
  */
+
 public class IOConsole implements IO {
+    private boolean dataReady;
+
+    public  IOConsole(){
+        this.dataReady=true;
+    }
+
+    /**
+     * возвращает тип объекта
+     *
+     * @return
+     */
+    @Override
+    public IOType GetType() {
+        return IOType.console;
+    }
 
     /**
      * считать данные из контрола на форме
@@ -50,6 +67,20 @@ public class IOConsole implements IO {
     }
 
     /**
+     * вывести данные в элементы на форме
+     *
+     * @param objects объекты для вывода, порядок важен
+     * @param message подпись(выводится над объектом)
+     */
+    @Override
+    public void Out(Object[] objects, String message) {
+        if (message.length() > 0)
+            System.out.println(message);
+        for (int i = 0; i < objects.length; i++)
+            Out(objects[i].toString(), "");
+    }
+
+    /**
      * вывести данные в консоль
      *
      * @param object  объект для вывода
@@ -72,5 +103,15 @@ public class IOConsole implements IO {
                 System.out.println(object);
             }
         }
+    }
+
+    @Override
+    public void SetDataReady(boolean value) {
+        dataReady = value;
+    }
+
+    @Override
+    public boolean GetDataReady() {
+        return this.dataReady;
     }
 }

@@ -14,8 +14,9 @@ public abstract class SimpleForm extends JFrame {
     }
 
     public void Open(JPanel mainPanel) {
-        Runnable formRunnable = () -> Init(mainPanel);
-        new Thread(formRunnable).start();
+        //Runnable formRunnable = () -> Init(mainPanel);
+        //new Thread(formRunnable).start();
+        Init(mainPanel);
     }
 
     /**
@@ -23,7 +24,7 @@ public abstract class SimpleForm extends JFrame {
      *
      * @param mainPanel главная панель
      */
-    private void Init(JPanel mainPanel) {
+    public void Init(JPanel mainPanel) {
         add(mainPanel);
         setLocationRelativeTo(null);
         pack();

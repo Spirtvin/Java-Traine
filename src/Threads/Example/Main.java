@@ -1,12 +1,5 @@
 package Threads.Example;
 
-//TODO Сделать 3 потока :
-//TODO Первый выполняется 3 секунды.
-//TODO Второй начинает выполнение сразу после первого.
-//TODO Третий сразу после второго.
-//TODO* Два потока.
-
-
 public class  Main{
 
     public static void Thread() {

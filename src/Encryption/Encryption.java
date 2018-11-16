@@ -1,0 +1,97 @@
+package Encryption;
+
+/**
+ * Метод шифрования
+ */
+public abstract class Encryption {
+
+    /**
+     * Получает таблицу ASCII символов
+     *
+     * @return
+     */
+    public String GetASCIITable() {
+        String str = "";
+        for (int i = 32; i < 255; i++)
+            str += String.format("%c %d\n", i, i);
+        return str;
+    }
+
+    /**
+     * Создает метод шифрования
+     */
+    public Encryption() {
+    }
+
+    /**
+     * Функция шифрования
+     *
+     * @param value значение
+     * @param key   ключ
+     * @return
+     */
+    public abstract String EncryptFunction(String value, Integer key);
+
+    /**
+     * Функция шифрования
+     *
+     * @param value значение
+     * @param key   ключ
+     * @return
+     */
+    public abstract String EncryptFunction(String value, String key);
+
+    /**
+     * функция дешифрования
+     *
+     * @param value значение
+     * @param key   ключ
+     * @return
+     */
+    public abstract String DecryptFunction(String value, Integer key);
+
+    /**
+     * функция дешифрования
+     *
+     * @param value значение
+     * @param key   ключ
+     * @return
+     */
+    public abstract String DecryptFunction(String value, String key);
+
+    /**
+     * Шифрует указанное значение
+     *
+     * @param value значение
+     * @param key   ключ
+     * @return
+     */
+    public abstract String Encrypt(String value, String key);
+
+    /**
+     * Шифрует указанное значение
+     *
+     * @param value значение
+     * @param key   ключ
+     * @return
+     */
+    public abstract String Encrypt(String value, Integer key);
+
+    /**
+     * Дешифрует указанное значение
+     *
+     * @param encryptedValue зашифрованное значение
+     * @param key            ключ
+     * @return
+     */
+    public abstract String Decrypt(String encryptedValue, String key);
+
+    /**
+     * Дешифрует указанное значение
+     *
+     * @param encryptedValue зашифрованное значение
+     * @param key            ключ
+     * @return
+     */
+    public abstract String Decrypt(String encryptedValue, Integer key);
+}

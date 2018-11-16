@@ -1,6 +1,6 @@
 package Threads.Trains;
 
-import jline.ConsoleReader;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,8 +54,8 @@ public class Train extends Thread {
     }
 
     public void clearConsole() throws IOException, InterruptedException {
-        ConsoleReader reader = new ConsoleReader();
-        reader.clearScreen();
+        //ConsoleReader reader = new ConsoleReader();
+        //reader.clearScreen();
         //new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
     }
 

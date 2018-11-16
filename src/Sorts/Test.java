@@ -1,6 +1,6 @@
 package Sorts;
 
-import GUI_Forms.IOConsole;
+import Console.IOConsole;
 import Generator.Generator;
 
 import java.util.ArrayList;

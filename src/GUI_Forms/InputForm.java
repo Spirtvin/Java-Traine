@@ -12,14 +12,9 @@ public class InputForm extends IOForm {
     public JPanel mainPanel;
     private JLabel lblTitle;
 
-    /**
-     * данные, которые ввел пользователь
-     */
-    public Object data;
-
     public InputForm() {
         btnDone.setText("Готово");
-        //lblTitle.setText("Инструкия по вводу данных");
+        lblTitle.setText("Инструкия по вводу данных");
         lblTitle.setText(String.format("%d", Thread.currentThread().getId()));
         txbData.setText("Данные");
         Open(mainPanel);
@@ -35,13 +30,24 @@ public class InputForm extends IOForm {
         lblTitle.setText(labelTitle);
         txbData.setText(dataTitle);
         Open(mainPanel);
+
+    }
+
+    private Runnable GetData() {
+        Runnable component = () -> {
+            try {
+                data = In(txbData);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+        };
+        return component;
     }
 
     public void AddListeners() {
         btnDone.addActionListener(e -> {
             try {
-                //DataTransfer.StrData.data = (String) In("");
-                data = In(txbData);
+                new Thread(GetData()).start();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

@@ -1,16 +1,20 @@
 package Main;
 
+import Console.IOConsole;
 import DataStructures.Stack.Dynamic.DynamicStack;
 import DataStructures.Stack.Static.StaticStack;
-import GUI_Forms.IOConsole;
-import GUI_Forms.InputForm;
+import Encryption.Caesar;
+import Encryption.Viginer;
+import GUI_Forms.IOForm;
 import Games.XOGame.Core.XO;
+import Games.XOGame.Forms.Main;
 import Sorts.Buble.BubbleSort;
 import Sorts.Merge.MergeSort;
 import Sorts.Quick.QuickSort;
 import Sorts.Sort;
 import Sorts.Test;
 
+import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 
 public class GlobalTests {
@@ -54,13 +58,55 @@ public class GlobalTests {
         }
     }
 
-    public static void Game() {
-        //        GameXOTest();
-//        try {
-//            new Games.XOGame.Forms.Main();
-//        } catch (Exception ex) {
-//            System.out.println(ex);
-//        }
+    /**
+     *
+     */
+    public static void Forms() {
+//        Runnable r1 =new Runnable() {
+//            @Override
+//            public void run() {
+//                InputForm inputForm = new InputForm();
+//            }
+//        };
+//        Runnable r2 =new Runnable() {
+//            @Override
+//            public void run() {
+//                InputForm inputForm = new InputForm();
+//            }
+//        };
+//        Thread t1 =new Thread(r1);
+//        Thread t2 =new Thread(r2);
+//        t1.start();
+//        t2.start();
+        //InputForm inputForm2 = new InputForm();
+        Main main = new Main();
+
+    }
+
+    /**
+     *
+     */
+    public class XOCOnsole extends IOConsole {
+        XOCOnsole() throws Exception {
+            XO game = new XO(this);
+            game.Start();
+        }
+    }
+
+    /**
+     *
+     */
+    public void Game() {
+        try {
+            IOConsole ioConsole = new IOConsole();
+            IOForm ioForm = new IOForm();
+            //XO game = new XO(ioForm);
+            Main main = new Main();
+            //game.Start();
+            //new XOCOnsole();
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
     }
 
     /**
@@ -111,25 +157,47 @@ public class GlobalTests {
         t6.start();
     }
 
-    public static void Forms() {
-        Runnable r1 =new Runnable() {
-            @Override
-            public void run() {
-                InputForm inputForm = new InputForm();
-            }
-        };
-        Runnable r2 =new Runnable() {
-            @Override
-            public void run() {
-                InputForm inputForm = new InputForm();
-            }
-        };
-        Thread t1 =new Thread(r1);
-        Thread t2 =new Thread(r2);
-        t1.start();
-        t2.start();
 
-        //InputForm inputForm2 = new InputForm();
+    private static ArrayList<String> GetTestList() {
+        ArrayList<String> list = new ArrayList<>();
+        String str = "";
+        for (int i = (int) 'a'; i <= (int) 'z'; i++)
+            str += (char) i;
+        list.add(str);
+        str = "";
+        for (int i = (int) 'а'; i <= (int) 'я'; i++)
+            str += (char) i;
+        list.add(str);
+        list.add("папа");
+        list.add("mama");
+        list.add("lol kek cheburek");
+        return list;
     }
 
+    private static void Caesar() {
+        ArrayList<String> values = GetTestList();
+        Caesar encryption = new Caesar();
+        for (String str : values) {
+            String encryptedValue = encryption.Encrypt(str, 2);
+            System.out.println(encryptedValue);
+            System.out.println(encryption.Decrypt(encryptedValue, 2));
+        }
+    }
+
+    private static void Viginer() {
+        ArrayList<String> values = GetTestList();
+        Viginer encryption = new Viginer();
+        for (String str : values) {
+            String encryptedValue = encryption.Encrypt(str, "lemon");
+            System.out.println(encryptedValue);
+            System.out.println(encryption.Decrypt(encryptedValue, "lemon"));
+        }
+    }
+
+    /**
+     * Тесты для шифрования
+     */
+    public static void Encryption() {
+        Viginer();
+    }
 }

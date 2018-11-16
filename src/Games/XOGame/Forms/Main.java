@@ -5,7 +5,6 @@ import GUI_Forms.InputForm;
 import GUI_Forms.OutputForm;
 import Games.Field.GameField;
 import Games.XOGame.Core.XO;
-import Helpers.DataTransfer;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 
@@ -18,25 +17,28 @@ public class Main extends IOForm {
     private JTable tGameField;
     public JPanel MainPanel;
     private JLabel lblOutPut;
+    private XO game;
 
     public Main() {
         try {
             InputForm in = new InputForm("Готово", "Размер поля", "");
             while (!in.GetDataReady())
                 Thread.sleep(1000);
+            int size = Integer.parseInt((String) in.data);
             in.Close();
-            GameField field = new GameField(Integer.parseInt(DataTransfer.StrData.data));
+            GameField field = new GameField(size);
+
             Out(field, tGameField);
             Init();
-            XO game = new XO(this);
-            game.Start();
+            this.game = new XO(size, this);
+            this.game.Start();
         } catch (Exception ex) {
             new OutputForm("Ok", ex);
         }
     }
 
     private void Init() {
-        Init(tGameField, lblOutPut);
+        Init(new JComponent[]{tGameField}, new JComponent[]{tGameField, lblOutPut}, MainPanel);
         AddListeners();
         add(MainPanel);
         setLocationRelativeTo(null);
@@ -49,13 +51,12 @@ public class Main extends IOForm {
         tGameField.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                int row = tGameField.rowAtPoint(evt.getPoint());
-                int col = tGameField.columnAtPoint(evt.getPoint());
-                if (row >= 0 && col >= 0) {
-                    System.out.println(row);
-                    System.out.println(col);
-                    SetDataReady(true);
+                try {
+                    In(tGameField);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
+
             }
         });
     }

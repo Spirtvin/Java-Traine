@@ -5,6 +5,7 @@ import Games.Enums.CellValues;
 import Games.Field.GameField;
 import Games.Game;
 import Interfaces.IO;
+import Interfaces.IOType;
 
 public class XO extends Game {
 
@@ -60,11 +61,28 @@ public class XO extends Game {
      * @return - массив {строка, столбец}
      */
     Integer[] GetCords() {
-        Integer[] cords = new Integer[]{
-                GetInt("Укажите строку:") - 1,
-                GetInt("Укажите столбец:") - 1
-        };
-        return cords;
+        while (!this.io.GetDataReady()) {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if (this.io.GetType() == IOType.console) {
+            Integer[] cords = new Integer[]{
+                    GetInt("Укажите строку:") - 1,
+                    GetInt("Укажите столбец:") - 1
+            };
+            return cords;
+        }
+        if (this.io.GetType() == IOType.form) {
+            try {
+                return (Integer[]) io.In("Укажите координаты:");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
     /**
@@ -145,6 +163,9 @@ public class XO extends Game {
         return false;
     }
 
+    /**
+     * @return
+     */
     boolean CheckWin() {
         boolean line = CheckWinToLine();
         boolean diag = CheckWinToDiagonal();
@@ -158,20 +179,25 @@ public class XO extends Game {
      */
     public void Start() {
         try {
-            Init(GetInt(Messages.Games.inputFieldSize), this.io);
+            //Init(GetInt(Messages.Games.inputFieldSize), this.io);
             while (!CheckWin()) {
-                io.Out(toString(), "");
+                int move = player + 1;
+                io.Out(new Object[]{this.field, "Ход игрока" + move}, "");
+                //OutputForm<String> out = new OutputForm<>("Ok","Ход игрока" + move);
                 SetMark();
                 GetNextPlayer();
             }
-            if (!Finish())
-                io.Out(String.format(Messages.Games.playerWon, player), "");
-            else
-                io.Out(Messages.Games.draw, "");
-            io.Out(toString(), "");
+            io.Out(this.field, "");
+            if (!Finish()) {
+                io.Out(new Object[]{this.field, String.format(Messages.Games.playerWon, player)}, "");
+                //OutputForm<String> out = new OutputForm<>("Ok",String.format(Messages.Games.playerWon, player));
+            } else
+                io.Out(new Object[]{this.field, Messages.Games.draw}, "");
+            //io.Out(Messages.Games.draw, "");
         } catch (Exception ex) {
-            io.Out(ex, "ОШИБКА!");
-            io.Out(ex.getMessage(), "Сообщение:");
+            io.Out(new Object[]{this.field, ex.getMessage()}, "");
+            //io.Out(ex, "ОШИБКА!");
+            //io.Out(ex.getMessage(), "Сообщение:");
         }
     }
 
@@ -196,11 +222,7 @@ public class XO extends Game {
         if (!Finish())
             str += GetCurrentPlayerStr();
         str += "\n";
-        for (int i = 0; i < field.GetSize().height; i++) {
-            for (int j = 0; j < field.GetSize().width; j++)
-                str += field.GetCell(i, j) + " ";
-            str += "\n";
-        }
+        str += this.field.toString();
         return str;
     }
     //</editor-fold>

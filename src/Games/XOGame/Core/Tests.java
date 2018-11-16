@@ -1,7 +1,7 @@
 package Games.XOGame.Core;
 
 import Constants.Messages;
-import GUI_Forms.IOConsole;
+import Console.IOConsole;
 import Games.Enums.CellValues;
 import Games.Game;
 import Games.Test;

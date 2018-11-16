@@ -31,10 +31,19 @@ public class GameField {
      */
     CellValues[][] cells;
 
+    /**
+     * @param rows
+     * @param cols
+     * @throws Exception
+     */
     public GameField(int rows, int cols) throws Exception {
         Init(rows, cols);
     }
 
+    /**
+     * @param size
+     * @throws Exception
+     */
     public GameField(int size) throws Exception {
         Init(size);
     }
@@ -68,15 +77,6 @@ public class GameField {
      */
     void Init(int size) throws Exception {
         Init(size, size);
-    }
-
-    /**
-     * очищает поле, без удаления ячеек
-     *
-     * @throws Exception
-     */
-    public void Clear() throws Exception {
-        Init(rowsCount, colsCount);
     }
 
     /**
@@ -121,12 +121,23 @@ public class GameField {
         return false;
     }
 
+    /**
+     * @param coords
+     * @param value
+     * @return
+     */
     public boolean SetCell(Integer[] coords, CellValues value) {
         if (coords.length > 1)
             return SetCell(coords[0], coords[1], value);
         return false;
     }
 
+    /**
+     * @param row
+     * @param col
+     * @param value
+     * @return
+     */
     public boolean SetCell(int row, int col, CellValues value) {
         if (Check(row, -1, rowsCount) && Check(col, -1, colsCount) && cells[row][col] == CellValues.empty) {
             cells[row][col] = value;
@@ -135,6 +146,11 @@ public class GameField {
         return false;
     }
 
+    /**
+     * @param row
+     * @param col
+     * @return
+     */
     public CellValues GetCell(int row, int col) {
         if (Check(row, -1, rowsCount) && Check(col, -1, colsCount)) {
             return cells[row][col];
@@ -142,11 +158,38 @@ public class GameField {
         return CellValues.inCorrect;
     }
 
+    /**
+     * @return
+     */
     public Size GetSize() {
         return new Size(rowsCount, colsCount);
     }
 
+    /**
+     * @return
+     */
     public int GetCellsCount() {
         return cellsCount;
+    }
+
+    /**
+     * очищает поле, без удаления ячеек
+     *
+     * @throws Exception
+     */
+    public void Clear() throws Exception {
+        Init(rowsCount, colsCount);
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+        str += "\n";
+        for (int i = 0; i < this.GetSize().height; i++) {
+            for (int j = 0; j < this.GetSize().width; j++)
+                str += this.GetCell(i, j) + " ";
+            str += "\n";
+        }
+        return str;
     }
 }
