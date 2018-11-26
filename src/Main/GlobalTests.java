@@ -1,6 +1,7 @@
 package Main;
 
 import Console.IOConsole;
+import DataStructures.Matrix.Matrix;
 import DataStructures.Stack.Dynamic.DynamicStack;
 import DataStructures.Stack.Static.StaticStack;
 import Encryption.Caesar;
@@ -15,6 +16,7 @@ import Sorts.Sort;
 import Sorts.Test;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.Semaphore;
 
 public class GlobalTests {
@@ -157,17 +159,40 @@ public class GlobalTests {
         t6.start();
     }
 
+    public static void Matrix() {
+        int size = 3;
+        Matrix<Integer> matrix = new Matrix<>(size, size);
+        Double counter = 1.0;
+        Random r = new Random();
+        for (int i = 0; i < size; i++)
+            for (int j = 0; j < size; j++)
+                matrix.Set(i, j,  r.nextInt());
+        System.out.println(matrix);
+        System.out.println(matrix.GetDeterminant());
+    }
+
+    enum Alphabet {
+        Cyrillic,
+        Latin
+    }
+
+    private static String GetAlphabet(Alphabet type) {
+        String str = "";
+        if (type == Alphabet.Cyrillic) {
+            for (int i = (int) 'а'; i <= (int) 'я'; i++)
+                str += (char) i;
+        } else {
+            for (int i = (int) 'a'; i <= (int) 'z'; i++)
+                str += (char) i;
+        }
+        return str;
+    }
 
     private static ArrayList<String> GetTestList() {
         ArrayList<String> list = new ArrayList<>();
-        String str = "";
-        for (int i = (int) 'a'; i <= (int) 'z'; i++)
-            str += (char) i;
-        list.add(str);
-        str = "";
-        for (int i = (int) 'а'; i <= (int) 'я'; i++)
-            str += (char) i;
-        list.add(str);
+        list.add(GetAlphabet(Alphabet.Cyrillic));
+        list.add(GetAlphabet(Alphabet.Latin));
+        list.add("bur");
         list.add("папа");
         list.add("mama");
         list.add("lol kek cheburek");
@@ -185,14 +210,31 @@ public class GlobalTests {
     }
 
     private static void Viginer() {
+        String key = "";
         ArrayList<String> values = GetTestList();
         Viginer encryption = new Viginer();
         for (String str : values) {
-            String encryptedValue = encryption.Encrypt(str, "lemon");
+            String encryptedValue = encryption.Encrypt(str, key);
+            //System.out.println(str);
             System.out.println(encryptedValue);
-            System.out.println(encryption.Decrypt(encryptedValue, "lemon"));
+            System.out.println(encryption.Decrypt(encryptedValue, key));
         }
+//        String str = "";
+//        for (int i = (int) 'a'; i <= (int) 'z'; i++)
+//            str += (char) i;
+//        System.out.println("Исходное сообщение:");
+//        System.out.println(str);
+//        Viginer encryption = new Viginer();
+//        for (int i = (int) 'a'; i <= (int) 'z'; i++) {
+//            String key = String.valueOf((char) i);
+//            String encryptedValue = encryption.Encrypt(str, key);
+//            System.out.println("Зашифрованное сообщение:");
+//            System.out.println(key + ":" + encryptedValue);
+//            System.out.println("Дешифрованное сообщение:");
+//            System.out.println(key + ":" + encryption.Decrypt(encryptedValue, key));
+//        }
     }
+//https://ru.wikipedia.org/wiki/Шифр_Хилла
 
     /**
      * Тесты для шифрования

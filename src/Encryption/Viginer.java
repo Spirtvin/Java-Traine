@@ -4,26 +4,18 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Viginer extends Caesar {
 
-    public Integer Count(String value, String key) {
-        Integer res = 0;
-        Integer count = 1;
-        Integer start = 0;
-        if (value.length() > 0) {
-            char c = value.charAt(0);
-            if (c >= 'a' && c <= 'z') {
-                start = (int) 'a';
-                count = 26;
-            }
-            if (c >= 'а' && c <= 'я') {
-                start = (int) 'а';
-                count = 32;
-            }
+    public String GetKey(String value, String key) {
+        String tempKey = key;
+        int index = 0;
+        while (value.length() > tempKey.length()) {
+            index = (index) % key.length();
+            tempKey += key.charAt(index);
+            index++;
         }
-        for (int i = 0; i < count; i++) {
-            if (key.charAt(0) == start + i)
-                res = start + i;
+        while (value.length() < tempKey.length()) {
+            tempKey = tempKey.substring(0, tempKey.length() - 1);
         }
-        return res;
+        return tempKey;
     }
 
     /**
@@ -35,8 +27,7 @@ public class Viginer extends Caesar {
      */
     @Override
     public String EncryptFunction(String value, Integer key) {
-        throw new NotImplementedException();
-
+        return super.EncryptFunction(value, key);
     }
 
     /**
@@ -49,17 +40,11 @@ public class Viginer extends Caesar {
     @Override
     public String EncryptFunction(String value, String key) {
         String str = "";
-        String tempKey = key;
-        int index = 0;
-        while (value.length() >= tempKey.length()) {
-            index = (index) % key.length();
-            tempKey += key.charAt(index);
-            index++;
-        }
-        for (int i = 0; i < tempKey.length(); i++) {
-            //TODO: доделать шифр
-            //super.Encrypt(ОДИН СИМВОЛ ИСХОДНОЙ СТРОКИ!!!,ТЕКУЩЕЕ СМЕЩЕНИЕ!!!!);
-
+        key = GetKey(value, key);
+        for (int i = 0; i < key.length(); i++) {
+            super.GetSymbolInfo(key.charAt(i));
+            int offset = (int) key.charAt(i) - start;
+            str += EncryptFunction(String.valueOf(value.charAt(i)), offset);
         }
         return str;
     }
@@ -73,7 +58,7 @@ public class Viginer extends Caesar {
      */
     @Override
     public String DecryptFunction(String value, Integer key) {
-        return null;
+        return super.DecryptFunction(value, key);
     }
 
     /**
@@ -85,7 +70,14 @@ public class Viginer extends Caesar {
      */
     @Override
     public String DecryptFunction(String value, String key) {
-        return null;
+        String str = "";
+        key = GetKey(value, key);
+        for (int i = 0; i < key.length(); i++) {
+            super.GetSymbolInfo(key.charAt(i));
+            int offset = (int) key.charAt(i) - start;
+            str += DecryptFunction(String.valueOf(value.charAt(i)), offset);
+        }
+        return str;
     }
 
     /**
@@ -122,7 +114,7 @@ public class Viginer extends Caesar {
      */
     @Override
     public String Decrypt(String encryptedValue, String key) {
-        return null;
+        return DecryptFunction(encryptedValue,key);
     }
 
     /**

@@ -13,7 +13,8 @@ public class Main {
      * @param args
      */
     public static void main(String args[]) {
-        GlobalTests.Encryption();
+        //GlobalTests.Encryption();
+        GlobalTests.Matrix();
     }
 }
 

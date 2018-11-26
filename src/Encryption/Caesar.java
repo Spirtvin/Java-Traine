@@ -65,12 +65,14 @@ public class Caesar extends Encryption {
         String res = "";
         for (int i = 0; i < value.length(); i++) {
             GetSymbolInfo(value.charAt(i));
-            int offset = 0;
-            int code = (int) value.charAt(i) - start - key;
-            if (code < 0)
-                code = (int) value.charAt(i) + start - key;
-            offset = code % count;
-            res += (char) (start + offset);
+            int code = (int) value.charAt(i)-start;
+            while (key > 0) {
+                code = code-1;
+                if (code < 0)
+                    code = count-1;
+                key--;
+            }
+            res += (char) (start + code);
         }
         return res;
     }
