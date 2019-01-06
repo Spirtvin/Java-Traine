@@ -5,6 +5,7 @@ import DataStructures.Matrix.Matrix;
 import DataStructures.Stack.Dynamic.DynamicStack;
 import DataStructures.Stack.Static.StaticStack;
 import Encryption.Caesar;
+import Encryption.Hill;
 import Encryption.Viginer;
 import GUI_Forms.IOForm;
 import Games.XOGame.Core.XO;
@@ -16,15 +17,20 @@ import Sorts.Sort;
 import Sorts.Test;
 
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Scanner;
 import java.util.concurrent.Semaphore;
 
+/**
+ * Тесты для классов
+ *
+ * @see <a href="https://docs.google.com/document/d/18NGW8EXk3RCwCqGvtAM17UXJaT2oEFonLt2Ne-hbrWE/mobilebasic">Лабараторные</a>
+ */
 public class GlobalTests {
     /**
      * тестирование всех сортировок
      */
     public static void Sorts() {
-        Sort sorts[] = {
+        Sort[] sorts = {
                 new QuickSort(),
                 new MergeSort(),
                 new BubbleSort(),
@@ -159,16 +165,74 @@ public class GlobalTests {
         t6.start();
     }
 
-    public static void Matrix() {
+    public static Matrix GetMatrix() {
+        Matrix matrix = new Matrix();
+        Scanner scan = new Scanner(System.in);
+        int rows = 0;
+        int columns = 0;
+        Double value = 0.0;
+        System.out.print("Введите количество сторк: ");
+        rows = scan.nextInt();
+        System.out.print("Введите количество столбцов: ");
+        columns = scan.nextInt();
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                System.out.print(String.format("Введите элемент[%d,%d]: ", i, j));
+                value = scan.nextDouble();
+                matrix.Set(i, j, value);
+            }
+        }
+        return matrix;
+    }
+
+    /**
+     * тесты для матрицы
+     */
+    public static void Matrix() throws Exception {
         int size = 3;
-        Matrix<Integer> matrix = new Matrix<>(size, size);
-        Double counter = 1.0;
-        Random r = new Random();
-        for (int i = 0; i < size; i++)
-            for (int j = 0; j < size; j++)
-                matrix.Set(i, j,  r.nextInt());
-        System.out.println(matrix);
-        System.out.println(matrix.GetDeterminant());
+//        Matrix<Integer> matrix = new Matrix<>(size, size);
+//        Double counter = 1.0;
+//        Random r = new Random();
+//        for (int i = 0; i < size; i++)
+//            for (int j = 0; j < size; j++)
+//                matrix.Set(i, j, r.nextInt() % 100);
+//        System.out.println(matrix);
+//        System.out.println(matrix.GetDeterminant());
+        Double[][] items = {
+//                {1.0, -2.0, 3.0},
+//                {0.0, 4.0, -1.0},
+//                {5.0, 0.0, 0.0}
+                {6.0, 24.0, 1.0},
+                {13.0, 16.0, 10.0},
+                {20.0, 17.0, 15.0}
+
+//                {2.0, -3.0, 1.0},
+//                {5.0, 4.0, -2.0}
+        };
+
+        Double[][] items2 = {
+                {0.0},
+                {2.0},
+                {19.0}
+
+//                {1.0, 0.0, 5.0},
+//                {-2.0, 4.0, 0.0},
+//                {3.0, -1.0, 0.0}
+
+//                {-7.0, 5.0},
+//                {2.0, -1.0},
+//                {4.0, 3.0}
+        };
+
+
+        //Matrix matrix = GetMatrix();
+        Matrix key = new Matrix<Double>(items);
+        System.out.println(key);
+        Matrix message = new Matrix<Double>(items2);
+        System.out.println(message);
+        Matrix encryptedMessage = key.Mul(message).Mod(26);
+        System.out.println(encryptedMessage);
+        System.out.println(key.Inverse(26).Mul(encryptedMessage).Mod(26));
     }
 
     enum Alphabet {
@@ -200,13 +264,18 @@ public class GlobalTests {
     }
 
     private static void Caesar() {
-        ArrayList<String> values = GetTestList();
-        Caesar encryption = new Caesar();
-        for (String str : values) {
-            String encryptedValue = encryption.Encrypt(str, 2);
-            System.out.println(encryptedValue);
-            System.out.println(encryption.Decrypt(encryptedValue, 2));
+        try {
+            ArrayList<String> values = GetTestList();
+            Caesar encryption = new Caesar();
+            for (String str : values) {
+                String encryptedValue = encryption.Encrypt(str, 2);
+                System.out.println(encryptedValue);
+                System.out.println(encryption.Decrypt(encryptedValue, 2));
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
         }
+
     }
 
     private static void Viginer() {
@@ -234,12 +303,24 @@ public class GlobalTests {
 //            System.out.println(key + ":" + encryption.Decrypt(encryptedValue, key));
 //        }
     }
-//https://ru.wikipedia.org/wiki/Шифр_Хилла
+
+    /**
+     * <a href="https://ru.wikipedia.org/wiki/Шифр_Хилла">Шифр Хилла</a>
+     */
+    private static void Hill() {
+        String message = "asdasd";
+        Hill hill = new Hill();
+        String encryptedMessage = hill.Encrypt(message, "");
+        System.out.println(encryptedMessage);
+        String decryptMessage = hill.Decrypt(encryptedMessage, hill.GetKey().toString());
+        System.out.println(decryptMessage);
+    }
 
     /**
      * Тесты для шифрования
      */
     public static void Encryption() {
-        Viginer();
+        //Viginer();
+        Hill();
     }
 }
