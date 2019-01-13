@@ -105,12 +105,12 @@ public class IOForm extends SimpleForm implements IO {
             if (component.getClass().getName() == (new JTable()).getClass().getName()) {
                 if (object.getClass().getName() == (new GameField(3)).getClass().getName()) {
                     DefaultTableModel model = new DefaultTableModel();
-                    for (int i = 0; i < ((GameField) object).GetSize().width; i++) {
+                    for (int i = 0; i < (Integer) ((GameField) object).GetSize().width; i++) {
                         model.addColumn("Col" + i);
                     }
-                    for (int i = 0; i < ((GameField) object).GetSize().height; i++) {
-                        Object[] items = new Object[((GameField) object).GetSize().height];
-                        for (int j = 0; j < ((GameField) object).GetSize().width; j++) {
+                    for (int i = 0; i < (Integer) ((GameField) object).GetSize().height; i++) {
+                        Object[] items = new Object[(Integer) ((GameField) object).GetSize().height];
+                        for (int j = 0; j < (Integer) ((GameField) object).GetSize().width; j++) {
                             items[j] = ((GameField) object).GetCell(i, j).toString();
                         }
                         model.addRow(items);

@@ -1,5 +1,7 @@
 package Encryption;
 
+import Common.Exceptions.NotImplementedException;
+
 /**
  * Метод шифрования
  */
@@ -14,6 +16,29 @@ public abstract class Encryption {
         String str = "";
         for (int i = 32; i < 255; i++)
             str += String.format("%c %d\n", i, i);
+        return str;
+    }
+
+    enum Alphabet {
+        Cyrillic,
+        Latin
+    }
+
+    /**
+     * Получает алфавит определенного типа
+     *
+     * @param type
+     * @return
+     */
+    public String GetAlphabet(Alphabet type) {
+        String str = "";
+        if (type == Alphabet.Cyrillic) {
+            for (int i = (int) 'а'; i <= (int) 'я'; i++)
+                str += (char) i;
+        } else {
+            for (int i = (int) 'a'; i <= (int) 'z'; i++)
+                str += (char) i;
+        }
         return str;
     }
 
@@ -75,7 +100,7 @@ public abstract class Encryption {
      * @param key   ключ
      * @return
      */
-    public abstract String Encrypt(String value, Integer key);
+    public abstract String Encrypt(String value, Integer key) throws NotImplementedException;
 
     /**
      * Дешифрует указанное значение
@@ -93,5 +118,5 @@ public abstract class Encryption {
      * @param key            ключ
      * @return
      */
-    public abstract String Decrypt(String encryptedValue, Integer key);
+    public abstract String Decrypt(String encryptedValue, Integer key) throws NotImplementedException;
 }

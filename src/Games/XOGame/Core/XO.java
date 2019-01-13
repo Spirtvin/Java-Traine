@@ -114,23 +114,23 @@ public class XO extends Game {
      */
     boolean CheckWinToLine() {
         int count = 0;
-        for (int i = 0; i < field.GetSize().height; i++) {
+        for (int i = 0; i < (Integer) field.GetSize().height; i++) {
             count = 0;
             CellValues value = field.GetCell(i, 0);
-            for (int j = 0; j < field.GetSize().width; j++)
+            for (int j = 0; j < (Integer) field.GetSize().width; j++)
                 if (field.GetCell(i, j) == value && value != CellValues.empty)
                     count++;
-            if (count == field.GetSize().width)
+            if (count == (Integer) field.GetSize().width)
                 return true;
         }
 
-        for (int i = 0; i < field.GetSize().height; i++) {
+        for (int i = 0; i < (Integer) field.GetSize().height; i++) {
             count = 0;
             CellValues value = field.GetCell(0, i);
-            for (int j = 0; j < field.GetSize().width; j++)
+            for (int j = 0; j < (Integer) field.GetSize().width; j++)
                 if (field.GetCell(j, i) == value && value != CellValues.empty)
                     count++;
-            if (count == field.GetSize().width)
+            if (count == (Integer) field.GetSize().width)
                 return true;
         }
         return false;
@@ -143,7 +143,7 @@ public class XO extends Game {
      */
     boolean CheckWinToDiagonal() {
         int count = 0;
-        int size = field.GetSize().height;
+        int size = (Integer) field.GetSize().height;
         CellValues value = field.GetCell(0, 0);
         for (int i = 0; i < size; i++) {
             if (field.GetCell(i, i) == value && value != CellValues.empty)
@@ -158,9 +158,7 @@ public class XO extends Game {
             if (field.GetCell(i, size - 1 - i) == value && value != CellValues.empty)
                 count++;
         }
-        if (count == size)
-            return true;
-        return false;
+        return count == size;
     }
 
     /**

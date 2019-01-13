@@ -56,7 +56,7 @@ public abstract class SimpleForm extends JFrame {
      */
     private void $$$setupUI$$$() {
         basePanel = new JPanel();
-        basePanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        basePanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
     }
 
     /**
@@ -65,4 +65,5 @@ public abstract class SimpleForm extends JFrame {
     public JComponent $$$getRootComponent$$$() {
         return basePanel;
     }
+
 }

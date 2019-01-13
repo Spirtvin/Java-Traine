@@ -1,7 +1,7 @@
 package Games.XOGame.Core;
 
-import Constants.Messages;
 import Console.IOConsole;
+import Constants.Messages;
 import Games.Enums.CellValues;
 import Games.Game;
 import Games.Test;
@@ -21,7 +21,7 @@ public class Tests extends Test {
     private void CheckHorizontal() {
         try {
             xoGame.field.Clear();
-            for (int i = 0; i < xoGame.field.GetSize().height; i++)
+            for (int i = 0; i < (Integer) xoGame.field.GetSize().height; i++)
                 xoGame.field.SetCell(0, i, CellValues.o);
             Assert("CheckHorizontal", xoGame.CheckWinToLine(), true);
         } catch (Exception ex) {
@@ -35,7 +35,7 @@ public class Tests extends Test {
     private void CheckVertical() {
         try {
             xoGame.field.Clear();
-            for (int i = 0; i < xoGame.field.GetSize().height; i++)
+            for (int i = 0; i < (Integer) xoGame.field.GetSize().height; i++)
                 xoGame.field.SetCell(i, 0, CellValues.o);
             Assert("CheckVertical", xoGame.CheckWinToLine(), true);
         } catch (Exception ex) {
@@ -50,7 +50,7 @@ public class Tests extends Test {
         try {
 
             xoGame.field.Clear();
-            for (int i = 0; i < xoGame.field.GetSize().height; i++)
+            for (int i = 0; i < (Integer) xoGame.field.GetSize().height; i++)
                 xoGame.field.SetCell(i, i, CellValues.o);
             Assert("CheckDiagonal1", xoGame.CheckWinToDiagonal(), true);
         } catch (Exception ex) {
@@ -64,8 +64,8 @@ public class Tests extends Test {
     private void CheckDiagonal2() throws Exception {
         try {
             xoGame.field.Clear();
-            for (int i = 0; i < xoGame.field.GetSize().height; i++)
-                xoGame.field.SetCell(i, xoGame.field.GetSize().height - 1-i, CellValues.x);
+            for (int i = 0; i < (Integer) xoGame.field.GetSize().height; i++)
+                xoGame.field.SetCell(i, (Integer) xoGame.field.GetSize().height - 1 - i, CellValues.x);
             Assert("CheckDiagonal2", xoGame.CheckWinToDiagonal(), true);
         } catch (Exception ex) {
             System.out.println(ex);

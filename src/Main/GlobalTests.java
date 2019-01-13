@@ -1,15 +1,20 @@
 package Main;
 
 import Console.IOConsole;
+import Constants.Paths;
 import DataStructures.Matrix.Matrix;
 import DataStructures.Stack.Dynamic.DynamicStack;
 import DataStructures.Stack.Static.StaticStack;
 import Encryption.Caesar;
 import Encryption.Hill;
 import Encryption.Viginer;
+import EncryptionHack.Helper;
 import GUI_Forms.IOForm;
 import Games.XOGame.Core.XO;
 import Games.XOGame.Forms.Main;
+import Helpers.Alphabets;
+import Helpers.FileIO;
+import Helpers.Rand;
 import Sorts.Buble.BubbleSort;
 import Sorts.Merge.MergeSort;
 import Sorts.Quick.QuickSort;
@@ -17,8 +22,11 @@ import Sorts.Sort;
 import Sorts.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.concurrent.Semaphore;
+
+import static Helpers.Alphabets.GetAlphabet;
 
 /**
  * Тесты для классов
@@ -235,27 +243,10 @@ public class GlobalTests {
         System.out.println(key.Inverse(26).Mul(encryptedMessage).Mod(26));
     }
 
-    enum Alphabet {
-        Cyrillic,
-        Latin
-    }
-
-    private static String GetAlphabet(Alphabet type) {
-        String str = "";
-        if (type == Alphabet.Cyrillic) {
-            for (int i = (int) 'а'; i <= (int) 'я'; i++)
-                str += (char) i;
-        } else {
-            for (int i = (int) 'a'; i <= (int) 'z'; i++)
-                str += (char) i;
-        }
-        return str;
-    }
-
     private static ArrayList<String> GetTestList() {
         ArrayList<String> list = new ArrayList<>();
-        list.add(GetAlphabet(Alphabet.Cyrillic));
-        list.add(GetAlphabet(Alphabet.Latin));
+        list.add(GetAlphabet(Alphabets.Alphabet.Cyrillic));
+        list.add(GetAlphabet(Alphabets.Alphabet.Latin));
         list.add("bur");
         list.add("папа");
         list.add("mama");
@@ -322,5 +313,38 @@ public class GlobalTests {
     public static void Encryption() {
         //Viginer();
         Hill();
+    }
+
+    public static boolean Language(HashMap items, HashMap alphabet) {
+        for (int i = 0; i < alphabet.size(); i++) {
+            if (items.get(1) == alphabet.get(i))
+                return true;
+        }
+        return false;
+    }
+
+    public static void EncyptionHackHelper() {
+        try {
+            Rand rand = new Rand();
+            String originalMessage = FileIO.GetText(Paths.inputFile).toLowerCase();
+            Caesar caesar = new Caesar();
+            String encyptedMessage = caesar.Encrypt(originalMessage, rand.NextInt(1, 100));
+
+
+            //String[] paths = {Paths.rusLanguage, Paths.engLanguage};
+            //Helper helper = new Helper(paths);
+            Helper helper = new Helper();
+            HashMap<Character, Double> originalFrequency = helper.GetFrequency(originalMessage);
+            helper = new Helper(originalFrequency);
+            System.out.println("ORIGINAL:");
+            System.out.println(originalMessage);
+            System.out.println("ENCRYPTED:");
+            System.out.println(encyptedMessage);
+            System.out.println("DECRYPTED:");
+            System.out.println(helper.Hack(encyptedMessage));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,6 +1,5 @@
 package Main;
 
-import Evklid.EuclidAdv;
 import Helpers.IO;
 
 //TODO:проверить на ошибки Hill - DecryptFunction
@@ -19,15 +18,16 @@ public class Main {
     public static void main(String[] args) {
 
         try {
-            IO<Integer> io = new IO();
+            //IO<Integer> io = new IO();
             //GlobalTests.Encryption();
             //GlobalTests.Matrix();
 
-            EuclidAdv euclidAdv = new EuclidAdv();
+            //EuclidAdv euclidAdv = new EuclidAdv();
             //System.out.println(euclidAdv.GCD(180,150));
             //io.Print(euclidAdv.GCD(180,150));
             //GlobalTests.Matrix();
-            GlobalTests.Encryption();
+            //GlobalTests.Encryption();
+            GlobalTests.EncyptionHackHelper();
         } catch (Exception ex) {
             IO<Exception> io = new IO();
             io.Print(ex);

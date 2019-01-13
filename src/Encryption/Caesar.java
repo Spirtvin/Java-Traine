@@ -1,5 +1,7 @@
 package Encryption;
 
+import Common.Exceptions.NotImplementedException;
+
 /**
  * Шифр Цезаря
  */
@@ -8,6 +10,10 @@ public class Caesar extends Encryption {
     Integer count = 0;
 
     public void GetSymbolInfo(char c) {
+        if (c >= 'A' && c <= 'Z') {
+            start = (int) 'A';
+            count = 26;
+        }
         if (c >= 'a' && c <= 'z') {
             start = (int) 'a';
             count = 26;
@@ -16,10 +22,15 @@ public class Caesar extends Encryption {
             start = (int) 'а';
             count = 32;
         }
+        if (c >= 'А' && c <= 'Я') {
+            start = (int) 'А';
+            count = 32;
+        }
         if (c >= ' ' && c <= '@') {
             start = (int) ' ';
             count = 32;
-        }
+        } else
+            count = 32;
     }
 
 
@@ -65,11 +76,11 @@ public class Caesar extends Encryption {
         String res = "";
         for (int i = 0; i < value.length(); i++) {
             GetSymbolInfo(value.charAt(i));
-            int code = (int) value.charAt(i)-start;
+            int code = (int) value.charAt(i) - start;
             while (key > 0) {
-                code = code-1;
+                code = code - 1;
                 if (code < 0)
-                    code = count-1;
+                    code = count - 1;
                 key--;
             }
             res += (char) (start + code);
@@ -109,7 +120,7 @@ public class Caesar extends Encryption {
      * @return
      */
     @Override
-    public String Decrypt(String encryptedValue, Integer key) {
+    public String Decrypt(String encryptedValue, Integer key) throws NotImplementedException {
         return DecryptFunction(encryptedValue, key);
     }
 
@@ -133,7 +144,7 @@ public class Caesar extends Encryption {
      * @return
      */
     @Override
-    public String Encrypt(String value, Integer key) {
+    public String Encrypt(String value, Integer key) throws NotImplementedException {
         return EncryptFunction(value, key);
     }
 

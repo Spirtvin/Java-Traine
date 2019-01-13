@@ -1,7 +1,7 @@
 package DataStructures.Matrix;
 
 
-import Common.Size;
+import Common.Types.Size;
 import Evklid.EuclidAdv;
 
 import java.util.ArrayList;

@@ -1,5 +1,7 @@
 package Interfaces;
 
+import Common.Exceptions.NotImplementedException;
+
 import javax.swing.*;
 
 /**
@@ -19,7 +21,7 @@ public interface IO {
      * @param component элемент управления на форме
      * @return
      */
-    Object In(JComponent component) throws InterruptedException;
+    Object In(JComponent component) throws InterruptedException, NotImplementedException;
 
     /**
      * считать данные из консоли
@@ -35,7 +37,7 @@ public interface IO {
      * @param object    объект для вывода
      * @param component элемент на форме
      */
-    void Out(Object object, JComponent component);
+    void Out(Object object, JComponent component) throws NotImplementedException;
 
     /**
      * вывести данные в элементы на форме

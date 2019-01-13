@@ -1,6 +1,6 @@
 package Encryption;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import Common.Exceptions.NotImplementedException;
 
 public class Viginer extends Caesar {
 
@@ -101,7 +101,7 @@ public class Viginer extends Caesar {
      * @return
      */
     @Override
-    public String Encrypt(String value, Integer key) {
+    public String Encrypt(String value, Integer key) throws NotImplementedException {
         throw new NotImplementedException();
     }
 
@@ -114,7 +114,7 @@ public class Viginer extends Caesar {
      */
     @Override
     public String Decrypt(String encryptedValue, String key) {
-        return DecryptFunction(encryptedValue,key);
+        return DecryptFunction(encryptedValue, key);
     }
 
     /**
@@ -125,7 +125,7 @@ public class Viginer extends Caesar {
      * @return
      */
     @Override
-    public String Decrypt(String encryptedValue, Integer key) {
+    public String Decrypt(String encryptedValue, Integer key) throws NotImplementedException {
         throw new NotImplementedException();
     }
 

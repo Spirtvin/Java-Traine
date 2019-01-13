@@ -1,8 +1,8 @@
 package Games.Field;
 
+import Common.Types.Size;
 import Constants.Messages;
 import Games.Enums.CellValues;
-import com.sun.glass.ui.Size;
 
 public class GameField {
 
@@ -113,12 +113,10 @@ public class GameField {
      * @return
      */
     boolean Check(Integer[] cords) {
-        if (cords.length > 1 &&
+        return cords.length > 1 &&
                 Check(cords[0], -1, rowsCount) &&
                 Check(cords[1], -1, colsCount) &&
-                cells[cords[0]][cords[1]] == CellValues.empty)
-            return true;
-        return false;
+                cells[cords[0]][cords[1]] == CellValues.empty;
     }
 
     /**
@@ -185,8 +183,8 @@ public class GameField {
     public String toString() {
         String str = "";
         str += "\n";
-        for (int i = 0; i < this.GetSize().height; i++) {
-            for (int j = 0; j < this.GetSize().width; j++)
+        for (int i = 0; i < (Integer) this.GetSize().height; i++) {
+            for (int j = 0; j < (Integer) this.GetSize().width; j++)
                 str += this.GetCell(i, j) + " ";
             str += "\n";
         }

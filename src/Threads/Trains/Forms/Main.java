@@ -25,12 +25,12 @@ public class Main extends SimpleForm {
         lstRight.setModel(modelRight);
         Open(mainPanel);
         for (int i = 0; i < 5; i++) {
-            Train train = new Train(String.valueOf(i + 1) + "L", 100, pbBridge, lblProgress, modelLeft, modelRight, semaphore, Direction.Right);
+            Train train = new Train((i + 1) + "L", 100, pbBridge, lblProgress, modelLeft, modelRight, semaphore, Direction.Right);
             modelLeft.addElement(train.name);
             train.start();
         }
         for (int i = 0; i < 2; i++) {
-            Train train = new Train(String.valueOf(i + 1) + "R", 100, pbBridge, lblProgress, modelLeft, modelRight, semaphore, Direction.Left);
+            Train train = new Train((i + 1) + "R", 100, pbBridge, lblProgress, modelLeft, modelRight, semaphore, Direction.Left);
             modelRight.addElement(train.name);
             train.start();
         }
@@ -62,17 +62,17 @@ public class Main extends SimpleForm {
      */
     private void $$$setupUI$$$() {
         mainPanel = new JPanel();
-        mainPanel.setLayout(new GridLayoutManager(2, 3, new Insets(0, 0, 0, 0), -1, -1));
+        mainPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 3, new Insets(0, 0, 0, 0), -1, -1));
         lstLeft = new JList();
-        mainPanel.add(lstLeft, new GridConstraints(0, 0, 2, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 150), null, 0, false));
+        mainPanel.add(lstLeft, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 2, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 150), null, 0, false));
         pbBridge = new JProgressBar();
         pbBridge.setValue(0);
-        mainPanel.add(pbBridge, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 20), null, 0, false));
+        mainPanel.add(pbBridge, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 20), null, 0, false));
         lstRight = new JList();
-        mainPanel.add(lstRight, new GridConstraints(0, 2, 2, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 150), null, 0, false));
+        mainPanel.add(lstRight, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 2, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 150), null, 0, false));
         lblProgress = new JLabel();
         lblProgress.setText("Label");
-        mainPanel.add(lblProgress, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mainPanel.add(lblProgress, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
@@ -81,4 +81,5 @@ public class Main extends SimpleForm {
     public JComponent $$$getRootComponent$$$() {
         return mainPanel;
     }
+
 }

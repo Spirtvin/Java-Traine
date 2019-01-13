@@ -1,8 +1,8 @@
 package Console;
 
+import Common.Exceptions.NotImplementedException;
 import Interfaces.IO;
 import Interfaces.IOType;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class IOConsole implements IO {
      * @return
      */
     @Override
-    public Object In(JComponent component) {
+    public Object In(JComponent component) throws NotImplementedException {
         throw new NotImplementedException();
     }
 
@@ -62,7 +62,7 @@ public class IOConsole implements IO {
      * @param component элемент на форме
      */
     @Override
-    public void Out(Object object, JComponent component) {
+    public void Out(Object object, JComponent component) throws NotImplementedException {
         throw new NotImplementedException();
     }
 
