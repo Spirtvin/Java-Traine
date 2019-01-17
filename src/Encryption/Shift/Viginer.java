@@ -1,4 +1,4 @@
-package Encryption;
+package Encryption.Shift;
 
 import Common.Exceptions.NotImplementedException;
 

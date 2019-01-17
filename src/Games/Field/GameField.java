@@ -1,7 +1,7 @@
 package Games.Field;
 
+import Common.Constants.Messages;
 import Common.Types.Size;
-import Constants.Messages;
 import Games.Enums.CellValues;
 
 public class GameField {

@@ -1,6 +1,6 @@
 package Games;
 
-import Constants.Messages;
+import Common.Constants.Messages;
 
 import java.util.ArrayList;
 

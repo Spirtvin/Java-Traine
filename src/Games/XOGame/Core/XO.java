@@ -1,6 +1,6 @@
 package Games.XOGame.Core;
 
-import Constants.Messages;
+import Common.Constants.Messages;
 import Games.Enums.CellValues;
 import Games.Field.GameField;
 import Games.Game;

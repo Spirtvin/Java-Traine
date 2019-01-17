@@ -1,6 +1,6 @@
-package EncryptionHack;
+package Encryption.Hack;
 
-import Constants.Integers;
+import Common.Constants.Integers;
 import Helpers.FileIO;
 
 import java.io.IOException;

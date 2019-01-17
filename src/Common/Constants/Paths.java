@@ -1,4 +1,4 @@
-package Constants;
+package Common.Constants;
 
 public class Paths {
     public static String engLanguage = "C:\\Users\\Дмитрий\\Desktop\\ENG.txt";

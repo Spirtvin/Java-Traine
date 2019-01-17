@@ -18,16 +18,7 @@ public class Main {
     public static void main(String[] args) {
 
         try {
-            //IO<Integer> io = new IO();
-            //GlobalTests.Encryption();
-            //GlobalTests.Matrix();
 
-            //EuclidAdv euclidAdv = new EuclidAdv();
-            //System.out.println(euclidAdv.GCD(180,150));
-            //io.Print(euclidAdv.GCD(180,150));
-            //GlobalTests.Matrix();
-            //GlobalTests.Encryption();
-            GlobalTests.EncyptionHackHelper();
         } catch (Exception ex) {
             IO<Exception> io = new IO();
             io.Print(ex);

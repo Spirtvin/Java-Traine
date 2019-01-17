@@ -1,4 +1,4 @@
-package Constants;
+package Common.Constants;
 
 /**
  * Тексты сообщений для классов
