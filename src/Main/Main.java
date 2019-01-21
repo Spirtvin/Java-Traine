@@ -1,8 +1,8 @@
 package Main;
 
 import Helpers.IO;
+import Tests.GlobalTests;
 
-//TODO:проверить на ошибки Hill - DecryptFunction
 
 /**
  * точка входа
@@ -16,13 +16,16 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-
         try {
+
+            GlobalTests.Encryptions.PBlock();
 
         } catch (Exception ex) {
             IO<Exception> io = new IO();
             io.Print(ex);
         }
+
+
     }
 }
 

@@ -3,6 +3,7 @@ package Tests;
 import Common.Constants.Paths;
 import Console.IOConsole;
 import DataStructures.Matrix.Matrix;
+import Encryption.Block.Blocks.PBlock;
 import Encryption.Hack.Helper;
 import Encryption.Shift.Caesar;
 import Encryption.Shift.Hill;
@@ -11,6 +12,7 @@ import GUI_Forms.IOForm;
 import Games.XOGame.Core.XO;
 import Games.XOGame.Forms.Main;
 import Helpers.Alphabets;
+import Helpers.Converter;
 import Helpers.FileIO;
 import Helpers.Rand;
 import Sorts.Buble.BubbleSort;
@@ -20,6 +22,7 @@ import Sorts.Sort;
 import Sorts.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.concurrent.Semaphore;
@@ -32,6 +35,24 @@ import static Helpers.Alphabets.GetAlphabet;
  * @see <a href="https://docs.google.com/document/d/18NGW8EXk3RCwCqGvtAM17UXJaT2oEFonLt2Ne-hbrWE/mobilebasic">Лабараторные</a>
  */
 public class GlobalTests {
+
+    private static <T> void Check(String testName, T actual, T expected) {
+        String message;
+        boolean equals = false;
+        Class<?> c1 = expected.getClass();
+        Class<?> c2 = expected.getClass();
+        if (c1 == c2) {
+            if (c1.equals(Integer[].class))
+                equals = Arrays.equals(Converter.Arrays.Convert((Integer[]) expected), Converter.Arrays.Convert((Integer[]) actual));
+            else
+                equals = expected.equals(actual);
+        }
+        if (equals)
+            message = String.format("%s PASSED!", testName);
+        else
+            message = String.format("%s FAILED! actual:%s expected:%s", testName, actual, expected);
+        System.out.println(message);
+    }
 
     private static ArrayList<String> GetTestList() {
         ArrayList<String> list = new ArrayList<>();
@@ -352,6 +373,20 @@ public class GlobalTests {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+
+        /**
+         *
+         */
+        public static void PBlock() {
+            PBlock block = new PBlock();
+            ArrayList<Integer> test = new ArrayList();
+            test.add(1);
+            test.add(0);
+            test.add(1);
+            test.add(0);
+            Check("IntToBin", block.IntToBin(100567), new Integer[]{1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1});
+            Check("BinToInt", block.BinToInt(test), 10);
         }
     }
 
