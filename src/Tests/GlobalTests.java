@@ -381,12 +381,21 @@ public class GlobalTests {
         public static void PBlock() {
             PBlock block = new PBlock();
             ArrayList<Integer> test = new ArrayList();
-            test.add(1);
-            test.add(0);
-            test.add(1);
-            test.add(0);
-            Check("IntToBin", block.IntToBin(100567), new Integer[]{1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1});
-            Check("BinToInt", block.BinToInt(test), 10);
+//            test.add(1);
+//            test.add(0);
+//            test.add(1);
+//            test.add(0);
+//            Check("IntToBin", block.IntToBin(10), new Integer[]{1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1});
+//            Check("BinToInt", block.BinToInt(test), 10);
+//            Integer[] tmp = block.IntToBin(654356);
+//            Integer tmp1 = block.BinToInt(tmp);
+//            System.out.println(tmp1);
+            Integer tmp = block.Encrypt(15);
+            System.out.println(tmp);
+            Integer tmp1 = block.Decrypt(tmp);
+            System.out.println(tmp1);
+
+
         }
     }
 

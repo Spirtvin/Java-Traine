@@ -1,17 +1,19 @@
 package Encryption.Block.Blocks;
 
+import Helpers.Arrays;
 import Helpers.Converter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PBlock extends Block {
+    private int size = Integer.SIZE - 1;
     private HashMap<Integer, Integer> key;
 
     public PBlock() {
         key = new HashMap<>();
-        for (int i = 0; i < Integer.SIZE; i += Byte.SIZE)
-            key.put(i, Integer.SIZE - 1 - i);
+        for (int i = 0; i < size; i++)
+            key.put(i, size - 1 - i);
     }
 
     /**
@@ -24,18 +26,14 @@ public class PBlock extends Block {
         ArrayList<Integer> result = new ArrayList<>();
         if (value == 0)
             result.add(0);
-        else
+        else {
+            value = Math.abs(value);
             while (value > 0) {
                 result.add(value % 2);
                 value = value >> 1;
             }
-        for (int i = 0; i != (result.size() / 2); i++) {
-            int tmpIndex = result.size() - 1 - i;
-            Integer tmp = result.get(tmpIndex);
-            result.set(tmpIndex, result.get(i));
-            result.set(i, tmp);
         }
-        return Converter.ArrayLists.Convert(result);
+        return new Arrays<Integer>().Reverse(Converter.ArrayLists.Convert(result));
     }
 
     /**
@@ -44,14 +42,23 @@ public class PBlock extends Block {
      * @param values
      * @return
      */
-    public Integer BinToInt(ArrayList<Integer> values) {
+    public Integer BinToInt(Integer[] values) {
         Integer result = 0;
-        for (int i = 0; i < values.size(); i++) {
-            if (values.get(i) == 1)
+        for (int i = 0; i < values.length; i++) {
+            if (values[i] == 1)
                 result += 1;
-            if (i != values.size() - 1)
+            if (i != values.length - 1)
                 result = result << 1;
         }
+        return result;
+    }
+
+    private Integer[] To32Bit(Integer[] values) {
+        Integer[] result = new Integer[size];
+        for (int i = 0; i < size; i++)
+            result[i] = 0;
+        for (int i = 0; i < values.length; i++)
+            result[result.length - 1 - i] = values[values.length - 1 - i];
         return result;
     }
 
@@ -63,8 +70,16 @@ public class PBlock extends Block {
      */
     @Override
     public Integer Encrypt(Integer value) {
-        return null;
+        Integer[] valueBin = To32Bit(IntToBin(value));
+        Integer[] result = new Integer[valueBin.length];
+        for (int i = 0; i < result.length; i++)
+            result[i] = 0;
+        for (int i = 0; i < valueBin.length; i++) {
+            result[i] = valueBin[key.get(i)];
+        }
+        return BinToInt(result);
     }
+
 
     /**
      * Функция  дешифрования
@@ -74,6 +89,13 @@ public class PBlock extends Block {
      */
     @Override
     public Integer Decrypt(Integer value) {
-        return null;
+        Integer[] valueBin = To32Bit(IntToBin(value));
+        Integer[] result = new Integer[valueBin.length];
+        for (int i = 0; i < result.length; i++)
+            result[i] = 0;
+        for (int i = 0; i < valueBin.length; i++)
+            result[key.get(i)] = valueBin[i];
+        return BinToInt(result);
+
     }
 }

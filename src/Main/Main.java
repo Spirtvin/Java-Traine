@@ -1,6 +1,5 @@
 package Main;
 
-import Helpers.IO;
 import Tests.GlobalTests;
 
 
@@ -17,15 +16,10 @@ public class Main {
      */
     public static void main(String[] args) {
         try {
-
             GlobalTests.Encryptions.PBlock();
-
         } catch (Exception ex) {
-            IO<Exception> io = new IO();
-            io.Print(ex);
+            ex.printStackTrace();
         }
-
-
     }
 }
 
