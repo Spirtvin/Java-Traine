@@ -1,5 +1,8 @@
 package Encryption.Block.Blocks;
 
+//TODO: доделать S block
+//http://protect.htmlweb.ru/des.htm
+//см. пояснения к табл. 4
 public class SBlock extends Block {
     /**
      * Функция  шифрования

@@ -16,7 +16,7 @@ public class Main {
      */
     public static void main(String[] args) {
         try {
-            GlobalTests.Encryptions.PBlock();
+            GlobalTests.Encryptions.DES();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

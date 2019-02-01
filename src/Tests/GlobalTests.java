@@ -4,6 +4,7 @@ import Common.Constants.Paths;
 import Console.IOConsole;
 import DataStructures.Matrix.Matrix;
 import Encryption.Block.Blocks.PBlock;
+import Encryption.Block.DES.DES;
 import Encryption.Hack.Helper;
 import Encryption.Shift.Caesar;
 import Encryption.Shift.Hill;
@@ -21,6 +22,7 @@ import Sorts.Quick.QuickSort;
 import Sorts.Sort;
 import Sorts.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -397,6 +399,18 @@ public class GlobalTests {
 
 
         }
+
+        /**
+         *
+         */
+        public static void DES() {
+            try {
+                DES des = new DES();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
+
 
 }
