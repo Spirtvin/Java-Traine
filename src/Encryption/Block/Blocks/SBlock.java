@@ -8,12 +8,17 @@ public class SBlock extends Block {
      * Функция  шифрования
      *
      * @param value - шифруемое значение
-     * @return результат шифрования
+     * @return номер элемента в таблице шифрования, не само зашифрованное число
      */
     @Override
     public Integer Encrypt(Integer value) {
-        return null;
+        Integer[] tmp = IntToBin(value);
+        tmp = ToNBit(tmp, 6);
+        Integer rowNumber = BinToInt(new Integer[]{tmp[0], tmp[tmp.length - 1]});
+        Integer columNnumber = BinToInt(new Integer[]{tmp[1], tmp[2], tmp[3], tmp[4]});
+        return rowNumber * 16 + columNnumber;
     }
+
 
     /**
      * Функция  дешифрования
@@ -25,4 +30,5 @@ public class SBlock extends Block {
     public Integer Decrypt(Integer value) {
         return null;
     }
+
 }

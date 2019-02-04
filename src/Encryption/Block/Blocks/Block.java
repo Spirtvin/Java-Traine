@@ -62,6 +62,19 @@ public abstract class Block {
         return result;
     }
 
+    public Integer[] ToNBit(Integer[] values, int size) {
+        if (size > 0) {
+            Integer[] result = new Integer[size];
+            for (int i = 0; i < size; i++)
+                result[i] = 0;
+            for (int i = 0; i < values.length; i++)
+                result[result.length - 1 - i] = values[values.length - 1 - i];
+            return result;
+        }
+        return new Integer[]{};
+
+    }
+
     /**
      * Функция  шифрования
      *

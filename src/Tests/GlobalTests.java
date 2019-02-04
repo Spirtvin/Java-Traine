@@ -5,6 +5,7 @@ import Console.IOConsole;
 import DataStructures.Matrix.Matrix;
 import Encryption.Block.Blocks.PBlock;
 import Encryption.Block.DES.DES;
+import Encryption.Block.DES.FeistelFunction;
 import Encryption.Hack.Helper;
 import Encryption.Shift.Caesar;
 import Encryption.Shift.Hill;
@@ -406,6 +407,15 @@ public class GlobalTests {
         public static void DES() {
             try {
                 DES des = new DES();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public static void Feistel() {
+            try {
+                FeistelFunction fiestel = new FeistelFunction();
+                fiestel.Encrypt(8);
             } catch (IOException e) {
                 e.printStackTrace();
             }
