@@ -12,11 +12,12 @@ public class SBlock extends Block {
      */
     @Override
     public Integer Encrypt(Integer value) {
-        Integer[] tmp = IntToBin(value);
-        tmp = ToNBit(tmp, 6);
-        Integer rowNumber = BinToInt(new Integer[]{tmp[0], tmp[tmp.length - 1]});
-        Integer columNnumber = BinToInt(new Integer[]{tmp[1], tmp[2], tmp[3], tmp[4]});
-        return rowNumber * 16 + columNnumber;
+//        Integer[] tmp = IntToBin(value);
+//        tmp = ToNBit(tmp, 6);
+//        Integer rowNumber = BinToInt(new Integer[]{tmp[0], tmp[tmp.length - 1]});
+//        Integer columNnumber = BinToInt(new Integer[]{tmp[1], tmp[2], tmp[3], tmp[4]});
+//        return rowNumber * 16 + columNnumber;
+        return null;
     }
 
 

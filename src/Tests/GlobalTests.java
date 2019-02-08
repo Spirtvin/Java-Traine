@@ -405,8 +405,10 @@ public class GlobalTests {
          *
          */
         public static void DES() {
+            Integer[] value = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
             try {
                 DES des = new DES();
+                System.out.println(des.EncryptFunction(value, 4));
             } catch (IOException e) {
                 e.printStackTrace();
             }

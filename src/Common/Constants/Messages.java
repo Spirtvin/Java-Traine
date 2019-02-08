@@ -11,11 +11,11 @@ public class Messages {
         public static String success = "Все тесты пройдены!";
         public static String testError = "Ошибка ожидалось %s получено %s";
         public static String testErrorWithName = "Ошибка в %s ожидалось %s получено %s";
-        public static String testIO="Для тестирования введите строку %s. столбец %s";
+        public static String testIO = "Для тестирования введите строку %s. столбец %s";
     }
 
     /**
-     * собщения игр
+     * собщения в играх
      */
     public static class Games {
         public static String inputFieldSize = "Введите размер поля";
@@ -24,6 +24,16 @@ public class Messages {
         public static String secondPlayer = "Ход второго игрока";
         public static String playerWon = "Победил игрок %d!";
         public static String draw = "ничья";
+    }
+
+    /**
+     * тексты исключений
+     */
+    public static class Exceptions {
+        public static String sizeNegative = "Отрицательный размер";
+        public static String sizeIncorrect = "Некорректный размер";
+        public static String indexIncorrect = "Индекс за пределами массива";
+        public static String valueIncorrect = "Некорректное значение";
     }
 
     public static class Fields {

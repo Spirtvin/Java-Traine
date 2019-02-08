@@ -1,6 +1,5 @@
 package Encryption.Block.DES;
 
-import Encryption.Block.Blocks.SBlock;
 import Helpers.FileIO;
 
 import java.io.IOException;
@@ -31,21 +30,21 @@ public class FeistelFunction {
     }
 
     public Integer Encrypt(int value) {
-        SBlock sBlock = new SBlock();
-        Integer[] bits = sBlock.ToNBit(sBlock.IntToBin(value), 48);
-        Integer[] encryptedValues = new Integer[8];
-        for (int i = 0, f = 0; i < 48; f++, i += 6) {
-            Integer partValue = sBlock.BinToInt(new Integer[]{bits[i], bits[i + 1], bits[i + 2], bits[i + 3], bits[i + 4], bits[i + 5]});
-            int tableValue = sBlock.Encrypt(partValue);
-            int encrytedValue = tables.get("s" + (f + 1)).get(tableValue);
-            encryptedValues[f] = encrytedValue;
-        }
-        Integer[] result = new Integer[32];
-        for (int i = 0; i < 8; i++) {
-            Integer[] bitValue = sBlock.ToNBit(sBlock.IntToBin(encryptedValues[i]), 4);
-            for (int j = 0; j < 4; j++)
-                result[i * 4 + j] = bitValue[j];
-        }
+//        SBlock sBlock = new SBlock();
+//        Integer[] bits = sBlock.ToNBit(sBlock.IntToBin(value), 48);
+//        Integer[] encryptedValues = new Integer[8];
+//        for (int i = 0, f = 0; i < 48; f++, i += 6) {
+//            Integer partValue = sBlock.BinToInt(new Integer[]{bits[i], bits[i + 1], bits[i + 2], bits[i + 3], bits[i + 4], bits[i + 5]});
+//            int tableValue = sBlock.Encrypt(partValue);
+//            int encrytedValue = tables.get("s" + (f + 1)).get(tableValue);
+//            encryptedValues[f] = encrytedValue;
+//        }
+//        Integer[] result = new Integer[32];
+//        for (int i = 0; i < 8; i++) {
+//            Integer[] bitValue = sBlock.ToNBit(sBlock.IntToBin(encryptedValues[i]), 4);
+//            for (int j = 0; j < 4; j++)
+//                result[i * 4 + j] = bitValue[j];
+//        }
         return null;
 //        SBlock sBlock = new SBlock();
 //        int tableValue = sBlock.Encrypt(value);

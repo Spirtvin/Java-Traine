@@ -1,5 +1,7 @@
 package Helpers;
 
+import Common.Constants.Messages;
+
 import java.util.ArrayList;
 
 public class Converter {
@@ -25,6 +27,24 @@ public class Converter {
             for (int i = 0; i < values.length; i++)
                 result[i] = values[i].intValue();
             return result;
+        }
+    }
+
+    public static class Integers {
+        public static Boolean Convert(Integer value) throws Exception {
+            if (value > -1 && value < 2) {
+                return value == 0;
+            } else
+                throw new Exception(Messages.Exceptions.valueIncorrect);
+        }
+    }
+
+    public static class Booleans {
+        public static Integer Convert(Boolean value) {
+            if (value)
+                return 1;
+            else
+                return 0;
         }
     }
 }

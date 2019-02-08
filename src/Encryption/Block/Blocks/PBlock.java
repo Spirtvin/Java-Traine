@@ -13,7 +13,6 @@ public class PBlock extends Block {
     }
 
 
-
     /**
      * Функция  шифрования
      *
@@ -22,14 +21,15 @@ public class PBlock extends Block {
      */
     @Override
     public Integer Encrypt(Integer value) {
-        Integer[] valueBin = To32Bit(IntToBin(value));
-        Integer[] result = new Integer[valueBin.length];
-        for (int i = 0; i < result.length; i++)
-            result[i] = 0;
-        for (int i = 0; i < valueBin.length; i++) {
-            result[i] = valueBin[key.get(i)];
-        }
-        return BinToInt(result);
+//        Integer[] valueBin = To32Bit(IntToBin(value));
+//        Integer[] result = new Integer[valueBin.length];
+//        for (int i = 0; i < result.length; i++)
+//            result[i] = 0;
+//        for (int i = 0; i < valueBin.length; i++) {
+//            result[i] = valueBin[key.get(i)];
+//        }
+//        return BinToInt(result);
+        return null;
     }
 
 
@@ -41,13 +41,13 @@ public class PBlock extends Block {
      */
     @Override
     public Integer Decrypt(Integer value) {
-        Integer[] valueBin = To32Bit(IntToBin(value));
-        Integer[] result = new Integer[valueBin.length];
-        for (int i = 0; i < result.length; i++)
-            result[i] = 0;
-        for (int i = 0; i < valueBin.length; i++)
-            result[key.get(i)] = valueBin[i];
-        return BinToInt(result);
-
+//        Integer[] valueBin = To32Bit(IntToBin(value));
+//        Integer[] result = new Integer[valueBin.length];
+//        for (int i = 0; i < result.length; i++)
+//            result[i] = 0;
+//        for (int i = 0; i < valueBin.length; i++)
+//            result[key.get(i)] = valueBin[i];
+//        return BinToInt(result);
+        return null;
     }
 }

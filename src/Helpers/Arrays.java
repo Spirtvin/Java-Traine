@@ -12,4 +12,8 @@ public class Arrays<T> {
             Swap(a, i, a.length - 1 - i);
         return a;
     }
+
+    public Boolean Check(T[] a, Integer index) {
+        return index > -1 && index < a.length;
+    }
 }
