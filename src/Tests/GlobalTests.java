@@ -3,6 +3,7 @@ package Tests;
 import Common.Constants.Paths;
 import Console.IOConsole;
 import DataStructures.Matrix.Matrix;
+import Encryption.Binary;
 import Encryption.Block.Blocks.PBlock;
 import Encryption.Block.DES.DES;
 import Encryption.Block.DES.FeistelFunction;
@@ -422,6 +423,20 @@ public class GlobalTests {
                 e.printStackTrace();
             }
         }
+
+        public static void Binary() throws Exception {
+//            for (int i = 0; i < 1024; i++) {
+//              Binary binary = new Binary(20);
+//                System.out.println(binary);
+//            }
+            Binary binary1 = new Binary(25);
+            Binary binary2 = new Binary(18);
+            System.out.println(binary1.AND(binary2));
+            System.out.println(binary1.OR(binary2));
+            System.out.println(binary1.XOR(binary2));
+        }
+
+
     }
 
 

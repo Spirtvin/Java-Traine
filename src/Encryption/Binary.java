@@ -1,23 +1,26 @@
 package Encryption;
 
 import Common.Constants.Messages;
+import Encryption.TruthTables.Tables;
 import Helpers.Arrays;
 import Helpers.Converter;
 
-import java.util.ArrayList;
-
 public class Binary {
 
-    private Arrays<Boolean> helper;
+    private Arrays<Boolean> helper = new Arrays<Boolean>();
 
     private Boolean[] bits;
+
+    public Binary() {
+        this.bits = new Boolean[]{};
+    }
 
     public Binary(Boolean[] bits) {
         this.bits = bits;
     }
 
-    public Binary(Integer value) {
-
+    public Binary(Integer value) throws Exception {
+        this.bits = this.IntToBin(value).GetBits();
     }
 
     public Boolean Get(int index) throws Exception {
@@ -25,6 +28,10 @@ public class Binary {
             return this.bits[index];
         else
             throw new Exception(Messages.Exceptions.indexIncorrect);
+    }
+
+    public Boolean[] GetBits() {
+        return this.bits;
     }
 
     public void Set(int index, Boolean value) throws Exception {
@@ -64,46 +71,34 @@ public class Binary {
         Integer length = Math.max(this.GetLength(), value.GetLength());
         Binary b1 = this.ToNBit(length);
         Binary b2 = value.ToNBit(length);
-        Boolean[] result = new Boolean[length];
-        for (int i = 0; i < length; i++) {
-            Integer v1 = Converter.Booleans.Convert(b1.Get(i));
-            Integer v2 = Converter.Booleans.Convert(b2.Get(i));
-            result[i] = Converter.Integers.Convert((v1 + v2) % 2);
-        }
-        return new Binary(result);
+        Binary result = new Binary();
+        result = result.ToNBit(length);
+        for (int i = 0; i < length; i++)
+            result.Set(i, Tables.XOR(b1.Get(i), b2.Get(i)));
+        return result;
     }
 
     public Binary AND(Binary value) throws Exception {
         Integer length = Math.max(this.GetLength(), value.GetLength());
         Binary b1 = this.ToNBit(length);
         Binary b2 = value.ToNBit(length);
-        Boolean[] result = new Boolean[length];
-        for (int i = 0; i < length; i++) {
-            Integer v1 = Converter.Booleans.Convert(b1.Get(i));
-            Integer v2 = Converter.Booleans.Convert(b2.Get(i));
-            result[i] = Converter.Integers.Convert(v1 * v2);
-        }
-        return new Binary(result);
+        Binary result = new Binary();
+        result = result.ToNBit(length);
+        for (int i = 0; i < length; i++)
+            result.Set(i, Tables.AND(b1.Get(i), b2.Get(i)));
+        return result;
     }
-
-    !!!!!!!!!!!
 
     public Binary OR(Binary value) throws Exception {
         Integer length = Math.max(this.GetLength(), value.GetLength());
         Binary b1 = this.ToNBit(length);
         Binary b2 = value.ToNBit(length);
-        Boolean[] result = new Boolean[length];
-        for (int i = 0; i < length; i++) {
-            Integer v1 = Converter.Booleans.Convert(b1.Get(i));
-            Integer v2 = Converter.Booleans.Convert(b2.Get(i));
-            result[i] = Converter.Integers.Convert((v1 + v2) % 2);
-            //TODO: доделать перенос в старший разряд
-        }
-        return new Binary(result);
+        Binary result = new Binary();
+        result = result.ToNBit(length);
+        for (int i = length - 1; i >= 0; i--)
+            result.Set(i, Tables.OR(b1.Get(i), b2.Get(i)));
+        return result;
     }
-
-    !!!!!!!!!!!!!!!
-
 
     /**
      * Переводит число в двоичный вид
@@ -111,18 +106,16 @@ public class Binary {
      * @param value значение для перевода
      * @return
      */
-    private Integer[] IntToBin(Integer value) {
-        ArrayList<Integer> result = new ArrayList<>();
-        if (value == 0)
-            result.add(0);
-        else {
-            value = Math.abs(value);
-            while (value > 0) {
-                result.add(value % 2);
-                value = value >> 1;
-            }
+    private Binary IntToBin(Integer value) throws Exception {
+        Binary result = new Binary();
+        result = result.ToNBit(Integer.SIZE);
+        int i = Integer.SIZE - 1;
+        while (value > 0) {
+            result.Set(i, Converter.Integers.Convert(value % 2));
+            value = value >> 1;
+            i--;
         }
-        return new Arrays<Integer>().Reverse(Converter.ArrayLists.Convert(result));
+        return result;
     }
 
     /**
@@ -131,15 +124,24 @@ public class Binary {
      * @param values
      * @return
      */
-    public Integer BinToInt(Integer[] values) {
+    public Integer BinToInt(Binary value) throws Exception {
         Integer result = 0;
-        for (int i = 0; i < values.length; i++) {
-            if (values[i] == 1)
-                result += 1;
-            if (i != values.length - 1)
-                result = result << 1;
+        int i = value.GetLength() - 1;
+        while (i > -1) {
+            result += Converter.Booleans.Convert(value.Get(i));
+            result = result << 1;
         }
         return result;
     }
 
+    @Override
+    public String toString() {
+        String str = "";
+        for (int i = 0; i < this.bits.length; i++) {
+            if (i % 4 == 0 && i > 0)
+                str += " ";
+            str += Converter.Booleans.Convert(this.bits[i]);
+        }
+        return str;
+    }
 }
