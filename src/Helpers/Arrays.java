@@ -16,4 +16,8 @@ public class Arrays<T> {
     public Boolean Check(T[] a, Integer index) {
         return index > -1 && index < a.length;
     }
+
+    public T[] Copy(T[] a) {
+        return java.util.Arrays.copyOf(a, a.length);
+    }
 }

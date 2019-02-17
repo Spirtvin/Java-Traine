@@ -1,5 +1,7 @@
 package Encryption.Block.Blocks;
 
+import Encryption.Binary;
+
 //TODO: доделать S block
 //http://protect.htmlweb.ru/des.htm
 //см. пояснения к табл. 4
@@ -12,14 +14,16 @@ public class SBlock extends Block {
      */
     @Override
     public Integer Encrypt(Integer value) {
-//        Integer[] tmp = IntToBin(value);
-//        tmp = ToNBit(tmp, 6);
-//        Integer rowNumber = BinToInt(new Integer[]{tmp[0], tmp[tmp.length - 1]});
-//        Integer columNnumber = BinToInt(new Integer[]{tmp[1], tmp[2], tmp[3], tmp[4]});
-//        return rowNumber * 16 + columNnumber;
-        return null;
+        try {
+            Boolean[] bits = new Binary(value).ToNBit(6).GetBits();
+            Integer rowNumber = new Binary(new Boolean[]{bits[0], bits[5]}).ToInt();
+            Integer columnNnumber = new Binary(new Boolean[]{bits[1], bits[2], bits[3], bits[4]}).ToInt();
+            return rowNumber * 16 + columnNnumber;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
-
 
     /**
      * Функция  дешифрования

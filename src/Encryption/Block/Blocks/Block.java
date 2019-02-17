@@ -22,8 +22,6 @@ public abstract class Block {
         return result;
     }
 
-
-
     /**
      * Функция  шифрования
      *

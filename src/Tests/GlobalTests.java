@@ -389,10 +389,10 @@ public class GlobalTests {
 //            test.add(0);
 //            test.add(1);
 //            test.add(0);
-//            Check("IntToBin", block.IntToBin(10), new Integer[]{1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1});
-//            Check("BinToInt", block.BinToInt(test), 10);
-//            Integer[] tmp = block.IntToBin(654356);
-//            Integer tmp1 = block.BinToInt(tmp);
+//            Check("ToBin", block.ToBin(10), new Integer[]{1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1});
+//            Check("ToInt", block.ToInt(test), 10);
+//            Integer[] tmp = block.ToBin(654356);
+//            Integer tmp1 = block.ToInt(tmp);
 //            System.out.println(tmp1);
             Integer tmp = block.Encrypt(15);
             System.out.println(tmp);
@@ -418,7 +418,7 @@ public class GlobalTests {
         public static void Feistel() {
             try {
                 FeistelFunction fiestel = new FeistelFunction();
-                fiestel.Encrypt(8);
+                System.out.println(fiestel.Encrypt(8));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -431,9 +431,12 @@ public class GlobalTests {
 //            }
             Binary binary1 = new Binary(25);
             Binary binary2 = new Binary(18);
-            System.out.println(binary1.AND(binary2));
-            System.out.println(binary1.OR(binary2));
-            System.out.println(binary1.XOR(binary2));
+            //System.out.println(binary1.AND(binary2));
+            //System.out.println(binary1.OR(binary2));
+            //System.out.println(binary1.XOR(binary2));
+            System.out.println(binary1);
+            System.out.println(binary1.LeftShift());
+            System.out.println(binary1.RightShift());
         }
 
 

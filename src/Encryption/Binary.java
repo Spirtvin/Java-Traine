@@ -20,7 +20,7 @@ public class Binary {
     }
 
     public Binary(Integer value) throws Exception {
-        this.bits = this.IntToBin(value).GetBits();
+        this.bits = this.ToBin(value).GetBits();
     }
 
     public Boolean Get(int index) throws Exception {
@@ -31,7 +31,8 @@ public class Binary {
     }
 
     public Boolean[] GetBits() {
-        return this.bits;
+        Arrays<Boolean> helper = new Arrays<>();
+        return helper.Copy(this.bits);
     }
 
     public void Set(int index, Boolean value) throws Exception {
@@ -60,8 +61,14 @@ public class Binary {
             Boolean[] result = new Boolean[size];
             for (int i = 0; i < size; i++)
                 result[i] = false;
-            for (int i = 0; i < this.bits.length; i++)
-                result[result.length - 1 - i] = this.bits[this.bits.length - 1 - i];
+            if (this.bits.length < size) {
+                for (int i = 0; i < this.bits.length; i++)
+                    result[result.length - 1 - i] = this.bits[this.bits.length - 1 - i];
+            } else {
+                for (int i = 0; i < size; i++)
+                    result[size - 1 - i] = this.bits[size - 1 - i];
+            }
+
             return new Binary(result);
         } else
             throw new Exception(Messages.Exceptions.sizeNegative);
@@ -106,7 +113,7 @@ public class Binary {
      * @param value значение для перевода
      * @return
      */
-    private Binary IntToBin(Integer value) throws Exception {
+    private Binary ToBin(Integer value) throws Exception {
         Binary result = new Binary();
         result = result.ToNBit(Integer.SIZE);
         int i = Integer.SIZE - 1;
@@ -124,14 +131,33 @@ public class Binary {
      * @param values
      * @return
      */
-    public Integer BinToInt(Binary value) throws Exception {
+    public Integer ToInt() throws Exception {
         Integer result = 0;
-        int i = value.GetLength() - 1;
+        int i = this.GetLength() - 1;
         while (i > -1) {
-            result += Converter.Booleans.Convert(value.Get(i));
+            result += Converter.Booleans.Convert(this.Get(i));
             result = result << 1;
+            i--;
         }
         return result;
+    }
+
+    public Binary LeftShift() {
+        Boolean[] result = this.GetBits();
+        Boolean tmp = result[0];
+        for (int i = 0; i < this.bits.length - 1; i++)
+            result[i] = result[i + 1];
+        result[this.bits.length - 1] = tmp;
+        return new Binary(result);
+    }
+
+    public Binary RightShift() {
+        Boolean[] result = this.GetBits();
+        Boolean tmp = result[result.length - 1];
+        for (int i = this.bits.length - 1; i > 0; i--)
+            result[i] = result[i - 1];
+        result[0] = tmp;
+        return new Binary(result);
     }
 
     @Override
