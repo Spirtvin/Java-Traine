@@ -34,6 +34,7 @@ public class Messages {
         public static String sizeIncorrect = "Некорректный размер";
         public static String indexIncorrect = "Индекс за пределами массива";
         public static String valueIncorrect = "Некорректное значение";
+        public static String binaryEmpty = "Пустое бинарное число";
     }
 
     public static class Fields {

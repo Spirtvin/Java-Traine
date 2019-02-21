@@ -3,12 +3,16 @@ package Encryption.Block.DES;
 
 import java.io.IOException;
 
-public class DES extends FeistelFunction {
+/**
+ * Шифрование DES
+ *
+ * @see <a href="https://ru.wikipedia.org/wiki/DES">Шифрование DES</a>
+ */
+public class DES extends FeistelNetwork {
 
     public DES() throws IOException {
         super();
     }
-
 
     public Integer[] EncryptFunction(Integer[] value, Integer key) {
 

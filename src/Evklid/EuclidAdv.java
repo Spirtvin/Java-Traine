@@ -4,8 +4,6 @@ package Evklid;
  * Расширенный алгорит Евклида
  */
 public class EuclidAdv {
-    //http://www.e-maxx-ru.1gb.ru/algo/extended_euclid_algorithm
-
     /**
      * Ище НОД для двух чисел
      * расширенным алгоритмом Евклида
@@ -15,7 +13,8 @@ public class EuclidAdv {
      * @return Массив значений
      * <p>[ GCD, X, Y ]</p>
      * <p>для урванения: X*a+Y*b=1</p>
-     * @see <a href="http://e-maxx.ru/algo/reverse_element">Расширенный алгоритм Евклида</a>
+     * @see <a href="http://e-maxx.ru/algo/reverse_element">Обратный элемент в кольце по модулю</a>
+     * @see <a href="http://www.e-maxx-ru.1gb.ru/algo/extended_euclid_algorithm">Расширенный алгоритм Евклида</a>
      */
     public static Integer[] GCD(int a, int b) {
         Integer[] res = new Integer[3]; // d, x, y

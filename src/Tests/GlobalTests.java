@@ -6,7 +6,7 @@ import DataStructures.Matrix.Matrix;
 import Encryption.Binary;
 import Encryption.Block.Blocks.PBlock;
 import Encryption.Block.DES.DES;
-import Encryption.Block.DES.FeistelFunction;
+import Encryption.Block.DES.FeistelNetwork;
 import Encryption.Hack.Helper;
 import Encryption.Shift.Caesar;
 import Encryption.Shift.Hill;
@@ -417,7 +417,7 @@ public class GlobalTests {
 
         public static void Feistel() {
             try {
-                FeistelFunction fiestel = new FeistelFunction();
+                FeistelNetwork fiestel = new FeistelNetwork();
                 System.out.println(fiestel.Encrypt(8));
             } catch (IOException e) {
                 e.printStackTrace();
@@ -437,6 +437,7 @@ public class GlobalTests {
             System.out.println(binary1);
             System.out.println(binary1.LeftShift());
             System.out.println(binary1.RightShift());
+            System.out.println(binary1.Parity());
         }
 
 

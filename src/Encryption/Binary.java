@@ -5,12 +5,18 @@ import Encryption.TruthTables.Tables;
 import Helpers.Arrays;
 import Helpers.Converter;
 
+/**
+ * Двоичное число
+ */
 public class Binary {
 
+    //<editor-fold desc="Fields">
     private Arrays<Boolean> helper = new Arrays<Boolean>();
 
     private Boolean[] bits;
+    //</editor-fold>
 
+    //<editor-fold desc="Construtors">
     public Binary() {
         this.bits = new Boolean[]{};
     }
@@ -22,7 +28,9 @@ public class Binary {
     public Binary(Integer value) throws Exception {
         this.bits = this.ToBin(value).GetBits();
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Getters">
     public Boolean Get(int index) throws Exception {
         if (helper.Check(this.bits, index))
             return this.bits[index];
@@ -35,6 +43,12 @@ public class Binary {
         return helper.Copy(this.bits);
     }
 
+    public Integer GetLength() {
+        return this.bits.length;
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Setters">
     public void Set(int index, Boolean value) throws Exception {
         if (helper.Check(this.bits, index))
             this.bits[index] = value;
@@ -49,11 +63,103 @@ public class Binary {
         else
             throw new Exception(Messages.Exceptions.valueIncorrect);
     }
+    //</editor-fold>
 
-    public Integer GetLength() {
-        return this.bits.length;
+    //<editor-fold desc="Logic Operations">
+
+    /**
+     * Исключающее или
+     *
+     * @param value
+     * @return
+     * @throws Exception
+     */
+    public Binary XOR(Binary value) throws Exception {
+        Integer length = Math.max(this.GetLength(), value.GetLength());
+        Binary b1 = this.ToNBit(length);
+        Binary b2 = value.ToNBit(length);
+        Binary result = new Binary();
+        result = result.ToNBit(length);
+        for (int i = 0; i < length; i++)
+            result.Set(i, Tables.XOR(b1.Get(i), b2.Get(i)));
+        return result;
     }
 
+    /**
+     * Логическое И
+     *
+     * @param value
+     * @return
+     * @throws Exception
+     */
+    public Binary AND(Binary value) throws Exception {
+        Integer length = Math.max(this.GetLength(), value.GetLength());
+        Binary b1 = this.ToNBit(length);
+        Binary b2 = value.ToNBit(length);
+        Binary result = new Binary();
+        result = result.ToNBit(length);
+        for (int i = 0; i < length; i++)
+            result.Set(i, Tables.AND(b1.Get(i), b2.Get(i)));
+        return result;
+    }
+
+    /**
+     * Логическое ИЛИ
+     *
+     * @param value
+     * @return
+     * @throws Exception
+     */
+    public Binary OR(Binary value) throws Exception {
+        Integer length = Math.max(this.GetLength(), value.GetLength());
+        Binary b1 = this.ToNBit(length);
+        Binary b2 = value.ToNBit(length);
+        Binary result = new Binary();
+        result = result.ToNBit(length);
+        for (int i = length - 1; i >= 0; i--)
+            result.Set(i, Tables.OR(b1.Get(i), b2.Get(i)));
+        return result;
+    }
+
+    /**
+     * Циклический сдвиг влево
+     *
+     * @return
+     */
+    public Binary LeftShift() {
+        Boolean[] result = this.GetBits();
+        Boolean tmp = result[0];
+        for (int i = 0; i < this.bits.length - 1; i++)
+            result[i] = result[i + 1];
+        result[this.bits.length - 1] = tmp;
+        return new Binary(result);
+    }
+
+    /**
+     * Циклический сдвиг вправо
+     *
+     * @return
+     */
+    public Binary RightShift() {
+        Boolean[] result = this.GetBits();
+        Boolean tmp = result[result.length - 1];
+        for (int i = this.bits.length - 1; i > 0; i--)
+            result[i] = result[i - 1];
+        result[0] = tmp;
+        return new Binary(result);
+    }
+
+//    public Binary Swap(HashMap<Integer,Integer> map) throws Exception {
+//        //TODO: сделать в любом двоичном числе перестановку по указанной таблице перестановок "E"
+//        //Создать бинарное число размером с количество ячеек таблицы
+//        //заполнить биты в соответсвии с таблицей
+//        //вернуть значение
+//        //Binary res = new Binary(map.size());
+//    }
+
+    //</editor-fold>
+
+    //<editor-fold desc="Converters">
     public Binary ToNBit(int size) throws Exception {
         if (size > 0) {
             if (size == this.GetLength())
@@ -72,39 +178,6 @@ public class Binary {
             return new Binary(result);
         } else
             throw new Exception(Messages.Exceptions.sizeNegative);
-    }
-
-    public Binary XOR(Binary value) throws Exception {
-        Integer length = Math.max(this.GetLength(), value.GetLength());
-        Binary b1 = this.ToNBit(length);
-        Binary b2 = value.ToNBit(length);
-        Binary result = new Binary();
-        result = result.ToNBit(length);
-        for (int i = 0; i < length; i++)
-            result.Set(i, Tables.XOR(b1.Get(i), b2.Get(i)));
-        return result;
-    }
-
-    public Binary AND(Binary value) throws Exception {
-        Integer length = Math.max(this.GetLength(), value.GetLength());
-        Binary b1 = this.ToNBit(length);
-        Binary b2 = value.ToNBit(length);
-        Binary result = new Binary();
-        result = result.ToNBit(length);
-        for (int i = 0; i < length; i++)
-            result.Set(i, Tables.AND(b1.Get(i), b2.Get(i)));
-        return result;
-    }
-
-    public Binary OR(Binary value) throws Exception {
-        Integer length = Math.max(this.GetLength(), value.GetLength());
-        Binary b1 = this.ToNBit(length);
-        Binary b2 = value.ToNBit(length);
-        Binary result = new Binary();
-        result = result.ToNBit(length);
-        for (int i = length - 1; i >= 0; i--)
-            result.Set(i, Tables.OR(b1.Get(i), b2.Get(i)));
-        return result;
     }
 
     /**
@@ -128,7 +201,6 @@ public class Binary {
     /**
      * Переводит число из двоичного кода в десятичный
      *
-     * @param values
      * @return
      */
     public Integer ToInt() throws Exception {
@@ -141,23 +213,23 @@ public class Binary {
         }
         return result;
     }
+    //</editor-fold>
 
-    public Binary LeftShift() {
-        Boolean[] result = this.GetBits();
-        Boolean tmp = result[0];
-        for (int i = 0; i < this.bits.length - 1; i++)
-            result[i] = result[i + 1];
-        result[this.bits.length - 1] = tmp;
-        return new Binary(result);
-    }
+    //<editor-fold desc="Other">
 
-    public Binary RightShift() {
-        Boolean[] result = this.GetBits();
-        Boolean tmp = result[result.length - 1];
-        for (int i = this.bits.length - 1; i > 0; i--)
-            result[i] = result[i - 1];
-        result[0] = tmp;
-        return new Binary(result);
+    /**
+     * Проверяет колчество единиц на четность
+     * @return true -если содержит четное число бит (единиц)
+     * @throws Exception
+     */
+    public Boolean Parity() throws Exception {
+        if (this.bits.length == 0)
+            throw new Exception(Messages.Exceptions.binaryEmpty);
+        Integer count = 0;
+        for (int i = 0; i < this.bits.length; i++)
+            if (this.bits[i] == true)
+                count++;
+        return count%2==0;
     }
 
     @Override
@@ -170,4 +242,5 @@ public class Binary {
         }
         return str;
     }
+    //</editor-fold>
 }

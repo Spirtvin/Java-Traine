@@ -1,5 +1,6 @@
 package Encryption.Block.DES;
 
+import Common.Constants.Messages;
 import Encryption.Binary;
 import Encryption.Block.Blocks.SBlock;
 import Helpers.FileIO;
@@ -8,17 +9,41 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.HashMap;
 
-public class FeistelFunction {
+/**
+ * Функция Фейстеля
+ *
+ * @see <a href="https://ru.wikipedia.org/wiki/Сеть_Фейстеля">Сеть Фейстеля</a>
+ */
+@SuppressWarnings("ALL")
+public class FeistelNetwork {
+    /**
+     * Именя файлов, содержащих таблицы битов
+     */
     private String[] fileNames = {"e", "ip0", "ip1", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "p"};
+
+    /**
+     * таблицы перестановок
+     */
     private HashMap<String, HashMap<Integer, Integer>> tables = new HashMap<>();
 
-
-    public FeistelFunction() throws IOException {
+    /**
+     * Создает сеть Фейстеля
+     *
+     * @throws IOException
+     */
+    public FeistelNetwork() throws IOException {
         String pathToProject = Paths.get("").toAbsolutePath().toString();
         for (int i = 0; i < this.fileNames.length; i++)
             tables.put(this.fileNames[i], GetHashMap(pathToProject + "\\src\\Encryption\\Block\\DES\\tables\\" + this.fileNames[i] + ".txt"));
     }
 
+    /**
+     * Составляет таблицу перестановок
+     *
+     * @param fileName
+     * @return
+     * @throws IOException
+     */
     public HashMap<Integer, Integer> GetHashMap(String fileName) throws IOException {
         String[] items = FileIO.GetText(fileName).split(" ");
         HashMap<Integer, Integer> result = new HashMap<>();
@@ -30,6 +55,9 @@ public class FeistelFunction {
         }
         return result;
     }
+
+
+    //public Binary
 
     public Integer Encrypt(Integer value) {
         try {
@@ -57,4 +85,18 @@ public class FeistelFunction {
     }
 
 
+    /**
+     * @param part 32-битный вектор вектор(левая или правая чать)
+     * @param key  48-битный ключ
+     * @return
+     */
+    public Binary EncryptFunction(Binary part, Binary key) throws Exception {
+        if (part.GetLength() == 32 && key.GetLength() == 48) {
+            Binary result = new Binary();
+
+            return result;
+        } else {
+            throw new Exception(Messages.Exceptions.sizeIncorrect);
+        }
+    }
 }
