@@ -31,13 +31,23 @@ public class Converter {
     }
 
     public static class Integers {
+
         public static Boolean Convert(Integer value) throws Exception {
             if (value > -1 && value < 2) {
                 return !(value == 0);
             } else
                 throw new Exception(Messages.Exceptions.valueIncorrect);
         }
+
+        public static Boolean Convert(Long value) throws Exception {
+            if (value > -1 && value < 2) {
+                return !(value == 0);
+            } else
+                throw new Exception(Messages.Exceptions.valueIncorrect);
+        }
     }
+
+
 
     public static class Booleans {
         public static Integer Convert(Boolean value) {

@@ -5,6 +5,8 @@ import Encryption.TruthTables.Tables;
 import Helpers.Arrays;
 import Helpers.Converter;
 
+import java.util.HashMap;
+
 /**
  * Двоичное число
  */
@@ -26,6 +28,10 @@ public class Binary {
     }
 
     public Binary(Integer value) throws Exception {
+        this.bits = this.ToBin(Long.valueOf(value)).GetBits();
+    }
+
+    public Binary(Long value) throws Exception {
         this.bits = this.ToBin(value).GetBits();
     }
     //</editor-fold>
@@ -38,6 +44,20 @@ public class Binary {
             throw new Exception(Messages.Exceptions.indexIncorrect);
     }
 
+    public Boolean[] Get(int index, int count) throws Exception {
+        Boolean[] result = new Boolean[count];
+        for (int i = 0; i < count; i++)
+            result[i] = this.Get(index + i);
+        return result;
+    }
+
+    public Boolean[] Get(int[] indexes) throws Exception {
+        Boolean[] result = new Boolean[indexes.length];
+        for (int i = 0; i < indexes.length; i++)
+            result[i] = this.Get(indexes[i]);
+        return result;
+    }
+
     public Boolean[] GetBits() {
         Arrays<Boolean> helper = new Arrays<>();
         return helper.Copy(this.bits);
@@ -46,6 +66,21 @@ public class Binary {
     public Integer GetLength() {
         return this.bits.length;
     }
+
+    public Binary GetHighest() {
+        Boolean[] bits = new Boolean[this.GetLength() / 2];
+        for (int i = 0; i < this.GetLength() / 2; i++)
+            bits[i] = this.bits[i];
+        return new Binary(bits);
+    }
+
+    public Binary GetLowest() {
+        Boolean[] bits = new Boolean[this.GetLength() / 2];
+        for (int i = 0; i < this.GetLength() / 2; i++)
+            bits[i] = this.bits[i + this.GetLength() / 2];
+        return new Binary(bits);
+    }
+
     //</editor-fold>
 
     //<editor-fold desc="Setters">
@@ -62,6 +97,31 @@ public class Binary {
             this.Set(index, value);
         else
             throw new Exception(Messages.Exceptions.valueIncorrect);
+    }
+
+    public void Set(int index, Boolean[] values) throws Exception {
+        for (int i = 0; i < values.length; i++)
+            this.Set(index + i, values[i]);
+    }
+
+    public Binary SetHighest(Binary part) throws Exception {
+        if (part.GetLength() == this.GetLength() / 2) {
+            Boolean[] bits = this.GetBits();
+            for (int i = 0; i < part.GetLength(); i++)
+                bits[i] = part.Get(i);
+            return new Binary(bits);
+        } else
+            throw new Exception(Messages.Exceptions.sizeIncorrect);
+    }
+
+    public Binary SetLowest(Binary part) throws Exception {
+        if (part.GetLength() == this.GetLength() / 2) {
+            Boolean[] bits = this.GetBits();
+            for (int i = this.GetLength() / 2; i < this.GetLength(); i++)
+                bits[i] = part.Get(i);
+            return new Binary(bits);
+        } else
+            throw new Exception(Messages.Exceptions.sizeIncorrect);
     }
     //</editor-fold>
 
@@ -149,13 +209,17 @@ public class Binary {
         return new Binary(result);
     }
 
-//    public Binary Swap(HashMap<Integer,Integer> map) throws Exception {
-//        //TODO: сделать в любом двоичном числе перестановку по указанной таблице перестановок "E"
-//        //Создать бинарное число размером с количество ячеек таблицы
-//        //заполнить биты в соответсвии с таблицей
-//        //вернуть значение
-//        //Binary res = new Binary(map.size());
-//    }
+    /**
+     * @param map
+     * @return Делает перестановку по указанной таблице
+     * @throws Exception
+     */
+    public Binary Swap(HashMap<Integer, Integer> map) throws Exception {
+        Boolean[] bits = new Boolean[map.size()];
+        for (int i = 0; i < map.size(); i++)
+            bits[i] = this.Get(map.get(i));
+        return new Binary(bits);
+    }
 
     //</editor-fold>
 
@@ -186,10 +250,10 @@ public class Binary {
      * @param value значение для перевода
      * @return
      */
-    private Binary ToBin(Integer value) throws Exception {
+    private Binary ToBin(Long value) throws Exception {
         Binary result = new Binary();
-        result = result.ToNBit(Integer.SIZE);
-        int i = Integer.SIZE - 1;
+        result = result.ToNBit(Long.SIZE);
+        int i = Long.SIZE - 1;
         while (value > 0) {
             result.Set(i, Converter.Integers.Convert(value % 2));
             value = value >> 1;
@@ -213,12 +277,29 @@ public class Binary {
         }
         return result;
     }
+
+    /**
+     * Переводит число из двоичного кода в десятичный
+     *
+     * @return
+     */
+    public Long ToLong() throws Exception {
+        Long result = 0L;
+        int i = this.GetLength() - 1;
+        while (i > -1) {
+            result += Converter.Booleans.Convert(this.Get(i));
+            result = result << 1;
+            i--;
+        }
+        return result;
+    }
     //</editor-fold>
 
     //<editor-fold desc="Other">
 
     /**
      * Проверяет колчество единиц на четность
+     *
      * @return true -если содержит четное число бит (единиц)
      * @throws Exception
      */
@@ -229,7 +310,7 @@ public class Binary {
         for (int i = 0; i < this.bits.length; i++)
             if (this.bits[i] == true)
                 count++;
-        return count%2==0;
+        return count % 2 == 0;
     }
 
     @Override

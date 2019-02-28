@@ -1,5 +1,6 @@
 package Encryption.Block.Blocks;
 
+import Common.Constants.Messages;
 import Encryption.Binary;
 
 //TODO: доделать S block
@@ -14,15 +15,15 @@ public class SBlock extends Block {
      */
     @Override
     public Integer Encrypt(Integer value) {
-        try {
-            Boolean[] bits = new Binary(value).ToNBit(6).GetBits();
-            Integer rowNumber = new Binary(new Boolean[]{bits[0], bits[5]}).ToInt();
-            Integer columnNnumber = new Binary(new Boolean[]{bits[1], bits[2], bits[3], bits[4]}).ToInt();
-            return rowNumber * 16 + columnNnumber;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return -1;
+        return null;
+    }
+
+    public Long Encrypt(Binary value) throws Exception {
+        if (value.GetLength() != 6)
+            throw new Exception(Messages.Exceptions.sizeIncorrect);
+        Long rowNumber = new Binary(value.Get(new int[]{0, 5})).ToLong();
+        Long columnNumber = new Binary(value.Get(1, 4)).ToLong();
+        return rowNumber * 16 + columnNumber;
     }
 
     /**

@@ -1,8 +1,8 @@
 package Encryption.Block.DES;
 
-import Common.Constants.Messages;
+import Common.Exceptions.NotImplementedException;
 import Encryption.Binary;
-import Encryption.Block.Blocks.SBlock;
+import Helpers.Arrays;
 import Helpers.FileIO;
 
 import java.io.IOException;
@@ -19,12 +19,12 @@ public class FeistelNetwork {
     /**
      * Именя файлов, содержащих таблицы битов
      */
-    private String[] fileNames = {"e", "ip0", "ip1", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "p"};
+    public String[] fileNames = {"e", "ip0", "ip1", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "p"};
 
     /**
-     * таблицы перестановок
+     * Таблицы перестановок
      */
-    private HashMap<String, HashMap<Integer, Integer>> tables = new HashMap<>();
+    public HashMap<String, HashMap<Integer, Integer>> tables = new HashMap<>();
 
     /**
      * Создает сеть Фейстеля
@@ -56,32 +56,25 @@ public class FeistelNetwork {
         return result;
     }
 
-
-    //public Binary
-
-    public Integer Encrypt(Integer value) {
-        try {
-            SBlock sBlock = new SBlock();
-            Boolean[] bits = new Binary(value).ToNBit(48).GetBits();
-            Integer[] encryptedValues = new Integer[8];
-            for (int i = 0, f = 0; i < 48; f++, i += 6) {
-                Integer partValue = new Binary(new Boolean[]{bits[i], bits[i + 1], bits[i + 2], bits[i + 3], bits[i + 4], bits[i + 5]}).ToInt();
-                int tableValue = sBlock.Encrypt(partValue);
-                int encrytedValue = tables.get("s" + (f + 1)).get(tableValue);
-                encryptedValues[f] = encrytedValue;
-            }
-            Boolean[] result = new Boolean[Integer.SIZE];
-            for (int i = 0; i < 8; i++) {
-                bits = new Binary(encryptedValues[i]).ToNBit(4).GetBits();
-                for (int j = 0; j < 4; j++)
-                    result[i * 4 + j] = bits[j];
-            }
-            return new Binary(result).ToInt();
-
-        } catch (Exception e) {
-            e.printStackTrace();
+    public Long Encrypt(Long value, Binary keys[]) throws Exception {
+        Binary binValue = new Binary(value);
+        Binary left = binValue.GetHighest();
+        Binary right = binValue.GetLowest();
+        for (int i = 0; i < keys.length; i++) {
+            Binary temp = left;
+            left = this.EncryptFunction(left, keys[i]);
+            left = left.XOR(right);
+            right = left;
         }
-        return null;
+        binValue = binValue.SetHighest(right);
+        binValue = binValue.SetLowest(left);
+        return binValue.ToLong();
+    }
+
+    public Long Decrpt(Long value, Binary keys[]) throws Exception {
+        Arrays<Binary> arraysHelper = new Arrays<>();
+        keys = arraysHelper.Reverse(keys);
+        return Encrypt(value, keys);
     }
 
 
@@ -90,13 +83,7 @@ public class FeistelNetwork {
      * @param key  48-битный ключ
      * @return
      */
-    public Binary EncryptFunction(Binary part, Binary key) throws Exception {
-        if (part.GetLength() == 32 && key.GetLength() == 48) {
-            Binary result = new Binary();
-
-            return result;
-        } else {
-            throw new Exception(Messages.Exceptions.sizeIncorrect);
-        }
+    public Binary EncryptFunction(Binary block, Binary key) throws Exception {
+        throw new NotImplementedException();
     }
 }

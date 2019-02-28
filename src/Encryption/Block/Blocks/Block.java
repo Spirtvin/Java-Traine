@@ -7,21 +7,6 @@ package Encryption.Block.Blocks;
 public abstract class Block {
     public int size = Integer.SIZE - 1;
 
-
-
-    /**
-     * @param values
-     * @return
-     */
-    public Integer[] To32Bit(Integer[] values) {
-        Integer[] result = new Integer[size];
-        for (int i = 0; i < size; i++)
-            result[i] = 0;
-        for (int i = 0; i < values.length; i++)
-            result[result.length - 1 - i] = values[values.length - 1 - i];
-        return result;
-    }
-
     /**
      * Функция  шифрования
      *

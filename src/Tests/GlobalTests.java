@@ -6,7 +6,6 @@ import DataStructures.Matrix.Matrix;
 import Encryption.Binary;
 import Encryption.Block.Blocks.PBlock;
 import Encryption.Block.DES.DES;
-import Encryption.Block.DES.FeistelNetwork;
 import Encryption.Hack.Helper;
 import Encryption.Shift.Caesar;
 import Encryption.Shift.Hill;
@@ -24,7 +23,6 @@ import Sorts.Quick.QuickSort;
 import Sorts.Sort;
 import Sorts.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -406,22 +404,23 @@ public class GlobalTests {
          *
          */
         public static void DES() {
-            Integer[] value = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
             try {
+                Integer[] value = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+                Binary[] keys = new Binary[]{new Binary(1).ToNBit(48)};
                 DES des = new DES();
-                System.out.println(des.EncryptFunction(value, 4));
-            } catch (IOException e) {
+                System.out.println(des.Encrypt(10L, keys));
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
         public static void Feistel() {
-            try {
-                FeistelNetwork fiestel = new FeistelNetwork();
-                System.out.println(fiestel.Encrypt(8));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                FeistelNetwork fiestel = new FeistelNetwork();
+//                System.out.println(fiestel.Encrypt(8));
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
         }
 
         public static void Binary() throws Exception {
