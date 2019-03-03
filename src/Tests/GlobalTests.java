@@ -437,7 +437,7 @@ public class GlobalTests {
 //            System.out.println(binary1.LeftShift());
 //            System.out.println(binary1.RightShift());
 //            System.out.println(binary1.Parity());
-            Binary value = new Binary(1).ToNBit(6);
+            Binary value = new Binary(32).ToNBit(6);
             Binary a = new Binary(value.Get(new int[]{0, 5}));
             Long intValue = a.ToLong();
         }

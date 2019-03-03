@@ -268,15 +268,16 @@ public class Binary {
      * @return
      */
     public Integer ToInt() throws Exception {
-        Integer result = 0;
-        int i = this.GetLength() - 1;
-        while (i > -1) {
-            result += Converter.Booleans.Convert(this.Get(i));
-            result = result << 1;
-            i--;
-        }
-        return result;
-        
+        //TODO: Исправить на как Long
+//        Integer result = 0;
+//        int i = this.GetLength() - 1;
+//        while (i > -1) {
+//            result += Converter.Booleans.Convert(this.Get(i));
+//            result = result << 1;
+//            i--;
+//        }
+//        return result;
+        return null;
     }
 
     /**
@@ -286,11 +287,9 @@ public class Binary {
      */
     public Long ToLong() throws Exception {
         Long result = 0L;
-        int i = this.GetLength() - 1;
-        while (i > -1) {
+        for (int i = 0; i < this.bits.length; i++) {
             result = result << 1;
             result += Converter.Booleans.Convert(this.Get(i));
-            i--;
         }
         return result;
     }
