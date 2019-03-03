@@ -15,13 +15,10 @@ public class Main {
      */
     public static void main(String[] args) {
         try {
-            //TODO: проверить EncryptFunction
-            //TODO: проверить почеу ключ состоит из нулей
-            //TODO: проверить работу S блока
-            GlobalTests.Encryptions.DES();
-            //GlobalTests.Encryptions.Feistel();
-            //GlobalTests.Encryptions.Binary();
 
+            //GlobalTests.Encryptions.Feistel();
+            GlobalTests.Encryptions.Binary();
+            //GlobalTests.Encryptions.DES();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

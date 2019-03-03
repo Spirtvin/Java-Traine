@@ -33,7 +33,7 @@ public class DES extends FeistelNetwork {
         for (int i = 0, f = 0, j = 0; i < result.GetLength(); f++, j += 4, i += 6) {
             Binary part = new Binary(result.Get(i, 6));
             Long tableValue = sBlock.Encrypt(part);
-            Integer encryptedValue = tables.get("s" + (f + 1)).get(tableValue);
+            Integer encryptedValue = tables.get("s" + (f + 1)).get(tableValue.intValue());
             Binary encryptedBits = new Binary(encryptedValue).ToNBit(4);
             temp.Set(j, encryptedBits.GetBits());
         }

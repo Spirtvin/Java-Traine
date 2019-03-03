@@ -236,7 +236,7 @@ public class Binary {
                     result[result.length - 1 - i] = this.bits[this.bits.length - 1 - i];
             } else {
                 for (int i = 0; i < size; i++)
-                    result[size - 1 - i] = this.bits[size - 1 - i];
+                    result[size - 1 - i] = this.bits[this.bits.length - 1 - i];
             }
 
             return new Binary(result);
@@ -287,8 +287,8 @@ public class Binary {
         Long result = 0L;
         int i = this.GetLength() - 1;
         while (i > -1) {
-            result += Converter.Booleans.Convert(this.Get(i));
             result = result << 1;
+            result += Converter.Booleans.Convert(this.Get(i));
             i--;
         }
         return result;

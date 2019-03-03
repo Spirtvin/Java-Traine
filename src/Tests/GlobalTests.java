@@ -428,15 +428,18 @@ public class GlobalTests {
 //              Binary binary = new Binary(20);
 //                System.out.println(binary);
 //            }
-            Binary binary1 = new Binary(25);
-            Binary binary2 = new Binary(18);
-            //System.out.println(binary1.AND(binary2));
-            //System.out.println(binary1.OR(binary2));
-            //System.out.println(binary1.XOR(binary2));
-            System.out.println(binary1);
-            System.out.println(binary1.LeftShift());
-            System.out.println(binary1.RightShift());
-            System.out.println(binary1.Parity());
+//            Binary binary1 = new Binary(25);
+//            Binary binary2 = new Binary(18);
+//            System.out.println(binary1.AND(binary2));
+//            System.out.println(binary1.OR(binary2));
+//            System.out.println(binary1.XOR(binary2));
+//            System.out.println(binary1);
+//            System.out.println(binary1.LeftShift());
+//            System.out.println(binary1.RightShift());
+//            System.out.println(binary1.Parity());
+            Binary value = new Binary(1).ToNBit(6);
+            Binary a = new Binary(value.Get(new int[]{0, 5}));
+            Long intValue = a.ToLong();
         }
 
 
