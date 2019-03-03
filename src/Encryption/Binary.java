@@ -276,6 +276,7 @@ public class Binary {
             i--;
         }
         return result;
+        
     }
 
     /**
