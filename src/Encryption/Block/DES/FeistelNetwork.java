@@ -66,12 +66,12 @@ public class FeistelNetwork {
             left = left.XOR(right);
             right = left;
         }
-        binValue = binValue.SetHighest(right);
-        binValue = binValue.SetLowest(left);
+        binValue.SetHighest(right);
+        binValue.SetLowest(left);
         return binValue.ToLong();
     }
 
-    public Long Decrpt(Long value, Binary keys[]) throws Exception {
+    public Long Decrypt(Long value, Binary keys[]) throws Exception {
         Arrays<Binary> arraysHelper = new Arrays<>();
         keys = arraysHelper.Reverse(keys);
         return Encrypt(value, keys);

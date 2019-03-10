@@ -406,9 +406,11 @@ public class GlobalTests {
         public static void DES() {
             try {
                 Integer[] value = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-                Binary[] keys = new Binary[]{new Binary(1).ToNBit(48)};
+                Binary[] keys = new Binary[]{new Binary(12345678).ToNBit(48)};
                 DES des = new DES();
-                System.out.println(des.Encrypt(10L, keys));
+                Long encrypted = des.Encrypt(-510889242069374240L, keys);
+                System.out.println(encrypted);
+                System.out.println(des.Decrypt(encrypted, keys));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -424,6 +426,12 @@ public class GlobalTests {
         }
 
         public static void Binary() throws Exception {
+            Binary a = new Binary(10L);
+            System.out.println(a);
+            System.out.println(Long.toBinaryString(-510889242069374240L));
+            Binary b = new Binary(-510889242069374240L);
+            System.out.println(b);
+
 //            for (int i = 0; i < 1024; i++) {
 //              Binary binary = new Binary(20);
 //                System.out.println(binary);
@@ -437,9 +445,9 @@ public class GlobalTests {
 //            System.out.println(binary1.LeftShift());
 //            System.out.println(binary1.RightShift());
 //            System.out.println(binary1.Parity());
-            Binary value = new Binary(32).ToNBit(6);
-            Binary a = new Binary(value.Get(new int[]{0, 5}));
-            Long intValue = a.ToLong();
+            //Binary value = new Binary(32).ToNBit(6);
+            //Binary a = new Binary(value.Get(new int[]{0, 5}));
+            //Long intValue = a.ToLong();
         }
 
 

@@ -31,7 +31,7 @@ public class PBlock extends Block {
                 bits[i] = bits[key.get(i)];
                 bits[key.get(i)] = temp;
             }
-            return new Binary(bits).ToInt();
+            return new Binary(bits).ToInt().intValue();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -54,7 +54,7 @@ public class PBlock extends Block {
                 bits[key.get(i)] = bits[i];
                 bits[i] = tmp;
             }
-            return new Binary(bits).ToInt();
+            return new Binary(bits).ToInt().intValue();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -104,22 +104,24 @@ public class Binary {
             this.Set(index + i, values[i]);
     }
 
-    public Binary SetHighest(Binary part) throws Exception {
+    public void SetHighest(Binary part) throws Exception {
         if (part.GetLength() == this.GetLength() / 2) {
-            Boolean[] bits = this.GetBits();
-            for (int i = 0; i < part.GetLength(); i++)
-                bits[i] = part.Get(i);
-            return new Binary(bits);
+            Set(0, part.GetBits());
+//            Boolean[] bits = this.GetBits();
+//            for (int i = 0; i < part.GetLength(); i++)
+//                bits[i] = part.Get(i);
+//            return new Binary(bits);
         } else
             throw new Exception(Messages.Exceptions.sizeIncorrect);
     }
 
-    public Binary SetLowest(Binary part) throws Exception {
+    public void SetLowest(Binary part) throws Exception {
         if (part.GetLength() == this.GetLength() / 2) {
-            Boolean[] bits = this.GetBits();
-            for (int i = this.GetLength() / 2; i < this.GetLength(); i++)
-                bits[i] = part.Get(i);
-            return new Binary(bits);
+            Set(this.GetLength() / 2, part.GetBits());
+//            Boolean[] bits = this.GetBits();
+//            for (int i = this.GetLength() / 2; i < this.GetLength(); i++)
+//                bits[i] = part.Get(i);
+//            return new Binary(bits);
         } else
             throw new Exception(Messages.Exceptions.sizeIncorrect);
     }
@@ -251,33 +253,52 @@ public class Binary {
      * @return
      */
     private Binary ToBin(Long value) throws Exception {
-        Binary result = new Binary();
-        result = result.ToNBit(Long.SIZE);
-        int i = Long.SIZE - 1;
-        while (value > 0) {
-            result.Set(i, Converter.Integers.Convert(value % 2));
-            value = value >> 1;
-            i--;
+        Boolean[] bits = new Boolean[Long.SIZE];
+        for (int i = 0; i < Long.SIZE; i++)
+            bits[i] = Boolean.FALSE;
+        String str = Long.toBinaryString(value);
+        int length = str.length();
+        for (int i = 0; i < Long.SIZE - length; i++)
+            str = "0" + str;
+        for (int i = 0; i < str.length(); i++) {
+            bits[i] = str.charAt(i) != '0';
         }
-        return result;
+        return new Binary(bits);
     }
+//    private Binary ToBin(Long value) throws Exception {
+//        Binary result = new Binary();
+//        result = result.ToNBit(Long.SIZE);
+//        int i = Long.SIZE - 1;
+//        if(value<0)
+//        {
+//            result.Set(0, Converter.Integers.Convert(1));
+//            //i--;
+//            value*=-1;
+//        }
+//        while (value > 0) {
+//            result.Set(i, Converter.Integers.Convert(value % 2));
+//            value = value >> 1;
+//            i--;
+//        }
+//        return result;
+//    }
+
+    //TODO: Исправить на Long
 
     /**
      * Переводит число из двоичного кода в десятичный
      *
      * @return
      */
-    public Integer ToInt() throws Exception {
-        //TODO: Исправить на как Long
-//        Integer result = 0;
-//        int i = this.GetLength() - 1;
-//        while (i > -1) {
-//            result += Converter.Booleans.Convert(this.Get(i));
-//            result = result << 1;
-//            i--;
-//        }
-//        return result;
-        return null;
+    public Long ToInt() throws Exception {
+        Long result = 0L;
+        int i = this.GetLength() - 1;
+        while (i > -1) {
+            result += Converter.Booleans.Convert(this.Get(i));
+            result = result << 1;
+            i--;
+        }
+        return result;
     }
 
     /**
