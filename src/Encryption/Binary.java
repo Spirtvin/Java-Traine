@@ -34,6 +34,18 @@ public class Binary {
     public Binary(Long value) throws Exception {
         this.bits = this.ToBin(value).GetBits();
     }
+
+    public Binary(String value) throws Exception {
+        this.bits = new Boolean[value.length()];
+        for (int i = 0; i < value.length(); i++) {
+            if (value.charAt(i) == '0')
+                this.bits[i] = Boolean.FALSE;
+            else if (value.charAt(i) == '1')
+                this.bits[i] = Boolean.TRUE;
+            else
+                throw new Exception(Messages.Exceptions.valueIncorrect);
+        }
+    }
     //</editor-fold>
 
     //<editor-fold desc="Getters">
@@ -223,6 +235,15 @@ public class Binary {
         return new Binary(bits);
     }
 
+    public Boolean IsEqual(Binary value) {
+        if (this.bits.length != value.GetLength())
+            return false;
+        for (int i = 0; i < this.bits.length; i++)
+            if (this.bits[i] != value.GetBits()[i])
+                return false;
+        return true;
+    }
+
     //</editor-fold>
 
     //<editor-fold desc="Converters">
@@ -265,25 +286,7 @@ public class Binary {
         }
         return new Binary(bits);
     }
-//    private Binary ToBin(Long value) throws Exception {
-//        Binary result = new Binary();
-//        result = result.ToNBit(Long.SIZE);
-//        int i = Long.SIZE - 1;
-//        if(value<0)
-//        {
-//            result.Set(0, Converter.Integers.Convert(1));
-//            //i--;
-//            value*=-1;
-//        }
-//        while (value > 0) {
-//            result.Set(i, Converter.Integers.Convert(value % 2));
-//            value = value >> 1;
-//            i--;
-//        }
-//        return result;
-//    }
 
-    //TODO: Исправить на Long
 
     /**
      * Переводит число из двоичного кода в десятичный

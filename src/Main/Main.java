@@ -18,7 +18,7 @@ public class Main {
 
             //GlobalTests.Encryptions.Feistel();
             GlobalTests.Encryptions.Binary();
-            //GlobalTests.Encryptions.DES();
+            GlobalTests.Encryptions.DES();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

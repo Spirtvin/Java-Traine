@@ -405,10 +405,14 @@ public class GlobalTests {
          */
         public static void DES() {
             try {
-                Integer[] value = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-                Binary[] keys = new Binary[]{new Binary(12345678).ToNBit(48)};
+                Integer[] values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+                Binary[] keys =
+                        {
+                                new Binary(13).ToNBit(48)
+                        };
                 DES des = new DES();
-                Long encrypted = des.Encrypt(-510889242069374240L, keys);
+                //Long encrypted = des.Encrypt(-510889242069374240L, keys);
+                Long encrypted = des.Encrypt(10L, keys);
                 System.out.println(encrypted);
                 System.out.println(des.Decrypt(encrypted, keys));
             } catch (Exception e) {
@@ -427,10 +431,11 @@ public class GlobalTests {
 
         public static void Binary() throws Exception {
             Binary a = new Binary(10L);
-            System.out.println(a);
-            System.out.println(Long.toBinaryString(-510889242069374240L));
-            Binary b = new Binary(-510889242069374240L);
-            System.out.println(b);
+            Binary b = new Binary(Long.toBinaryString(-510889242069374240L));
+            Binary c = new Binary(-510889242069374240L);
+            System.out.println(String.format("value b:%s", b));
+            System.out.println(String.format("value c:%s", c));
+            System.out.println(String.format("Is equal:%s", b.IsEqual(c)));
 
 //            for (int i = 0; i < 1024; i++) {
 //              Binary binary = new Binary(20);
