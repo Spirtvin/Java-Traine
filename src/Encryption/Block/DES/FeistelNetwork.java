@@ -58,6 +58,9 @@ public class FeistelNetwork {
 
     public Long Encrypt(Long value, Binary keys[]) throws Exception {
         Binary binValue = new Binary(value);
+
+        binValue = binValue.Swap(this.tables.get("ip0"));
+
         Binary left = binValue.GetHighest();
         Binary right = binValue.GetLowest();
         for (int i = 0; i < keys.length; i++) {
@@ -68,6 +71,9 @@ public class FeistelNetwork {
         }
         binValue.SetHighest(right);
         binValue.SetLowest(left);
+
+        binValue = binValue.Swap(this.tables.get("ip1"));
+
         return binValue.ToLong();
     }
 
